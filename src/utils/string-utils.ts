@@ -60,7 +60,6 @@ function pascalCase(value) {
 export {
   identity,
   isBlank,
-  isNotString,
   camelCase,
   kebabCase,
   snakeCase,

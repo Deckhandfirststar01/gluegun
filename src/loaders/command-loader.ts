@@ -11,7 +11,7 @@ import Command from '../domain/command'
  * @param  {string} file      The full path to the file to load.
  * @return {Command}          The command in any condition
  */
-export function loadCommandFromFile(file, options = {}) {
+export function loadCommandFromFile(file: string, options: any = {}) {
   const command = new Command()
 
   // sanity check the input

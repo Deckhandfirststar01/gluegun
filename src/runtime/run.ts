@@ -1,5 +1,5 @@
 import { parseParams, createParams } from '../utils/normalize-params'
-import { isNil } from 'ramdasauce'
+import { isNil } from 'ramda'
 import RunContext from '../domain/run-context'
 import Runtime from './runtime'
 import { findCommand } from './runtime-find-command'

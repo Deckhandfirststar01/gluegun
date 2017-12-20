@@ -1,6 +1,6 @@
 import test from 'ava'
-import cli from './cli'
-import sinon from 'sinon'
+import { run as cli } from './cli'
+import * as sinon from 'sinon'
 import uniqueTempDir from 'unique-temp-dir'
 
 sinon.stub(console, 'log')

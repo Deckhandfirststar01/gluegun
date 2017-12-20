@@ -1,5 +1,5 @@
-import yargsParse from 'yargs-parser'
-import { merge } from 'ramda'
+import * as yargsParse from 'yargs-parser'
+import { merge, is, equals } from 'ramda'
 
 const COMMAND_DELIMITER = ' '
 

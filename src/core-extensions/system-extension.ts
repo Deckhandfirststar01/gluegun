@@ -1,15 +1,16 @@
-const { exec: nodeExec } = require('child_process')
-const { isNil, split, head, tail, dissoc, trim, identity } = require('ramda')
-const execa = require('execa')
-const nodeWhich = require('which')
-const crossSpawn = require('cross-spawn')
+import { exec as nodeExec } from 'child_process'
+import { isNil, split, head, tail, dissoc, trim, identity } from 'ramda'
+import execa from 'execa'
+import nodeWhich from 'which'
+import crossSpawn from 'cross-spawn'
+import RunContext from '../domain/run-context'
 
 /**
  * Extensions to launch processes and open files.
  *
  * @param  {RunContext} context The running context.
  */
-export default function(context) {
+function attach(context: RunContext) {
   /**
    * Executes a commandline program asynchronously.
    *
@@ -22,7 +23,7 @@ export default function(context) {
     const nodeOptions = dissoc('trim', options)
 
     return new Promise((resolve, reject) => {
-      nodeExec(commandLine, nodeOptions, (error, stdout, stderr) => {
+      nodeExec(commandLine, nodeOptions, (error: any, stdout: string, stderr: string) => {
         if (error) {
           error.stderr = stderr
           reject(error)
@@ -106,3 +107,5 @@ export default function(context) {
 
   context.system = { exec, run, spawn, which, startTimer }
 }
+
+module.exports = attach

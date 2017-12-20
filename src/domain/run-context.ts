@@ -3,6 +3,10 @@ import Command from './command'
 import Runtime from '../runtime/runtime'
 
 class RunContext {
+  // our catch-all! since we can add whatever to this object
+  [key: string]: any
+
+  // known properties
   result?: any
   error?: any
   config: object

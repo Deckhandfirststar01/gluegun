@@ -70,4 +70,4 @@ function attach(context) {
   }
 }
 
-export default attach
+module.exports = attach

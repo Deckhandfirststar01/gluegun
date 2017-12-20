@@ -1,4 +1,4 @@
-import cosmiconfig from 'cosmiconfig'
+import * as cosmiconfig from 'cosmiconfig'
 
 /**
  * Loads the config for the app via CosmicConfig by searching in a few places.

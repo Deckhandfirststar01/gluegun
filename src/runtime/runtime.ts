@@ -4,10 +4,10 @@ import { loadPluginFromDirectory } from '../loaders/plugin-loader'
 import { loadConfig } from '../loaders/config-loader'
 import { loadCommandFromPreload } from '../loaders/command-loader'
 import { run } from './run'
-import { findCommand } from './runtime-find-command'
 import RunContext from '../domain/run-context'
 import Plugin from '../domain/plugin'
 import Command from '../domain/command'
+import Extension from '../domain/extension'
 
 import { isNil, dissoc } from 'ramda'
 import { resolve } from 'path'
@@ -18,7 +18,7 @@ import { resolve } from 'path'
 class Runtime {
   brand?: string
   plugins?: Plugin[]
-  extensions?: { name: string; setup: ((context: RunContext) => void) }[]
+  extensions?: Extension[]
   defaults?: object
   defaultPlugin?: Plugin
   config?: object
@@ -76,8 +76,8 @@ class Runtime {
         `Can't add command ${command.name} - no default plugin. You may have forgotten a src() on your runtime.`,
       )
     }
-    command = loadCommandFromPreload(command)
-    this.defaultPlugin.commands.unshift(command)
+    const newCommand: Command = loadCommandFromPreload(command)
+    this.defaultPlugin.commands.unshift(newCommand)
     return this
   }
 
@@ -103,11 +103,10 @@ class Runtime {
    * @return {Runtime}          This runtime.
    */
   addDefaultPlugin(directory: string, options: object = {}): Runtime {
-    const plugin = this.addPlugin(directory, Object.assign({ required: true, name: this.brand }, options))
-    this.defaultPlugin = plugin
+    this.defaultPlugin = this.addPlugin(directory, Object.assign({ required: true, name: this.brand }, options))
 
     // load config and set defaults
-    const config = loadConfig(this.brand, defaultPlugin.value) || {}
+    const config = loadConfig(this.brand, directory) || {}
     this.defaults = config.defaults
     this.config = dissoc('defaults', config)
 
@@ -119,9 +118,9 @@ class Runtime {
    *
    * @param  {string} directory The directory to load from.
    * @param  {Object} options   Additional loading options.
-   * @return {Runtime}          This runtime.
+   * @return {Plugin}           The plugin that was created.
    */
-  addPlugin(directory: string, options: object = {}): Runtime {
+  addPlugin(directory: string, options: object = {}): Plugin {
     if (!isDirectory(directory)) {
       if (options.required) {
         throw new Error(`Error: couldn't load plugin (not a directory): ${directory}`)
@@ -141,7 +140,7 @@ class Runtime {
 
     this.plugins.push(plugin)
     plugin.extensions.forEach(extension => this.addExtension(extension.name, extension.setup))
-    return this
+    return plugin
   }
 
   /**
@@ -151,36 +150,14 @@ class Runtime {
    * @param {Object} options   Addition loading options.
    * @return {Runtime}         This runtime
    */
-  addPlugins(directory: string, options: object = {}): Runtime {
+  addPlugins(directory: string, options: object = {}): Plugin[] {
     if (isBlank(directory) || !isDirectory(directory)) return this
 
     // find matching subdirectories
     const subdirs = subdirectories(directory, false, options['matching'], true)
 
     // load each one using `this.plugin`
-    subdirs.forEach(dir => this.addPlugin(dir, dissoc('matching', options)))
-
-    return this
-  }
-
-  /**
-   * Find the command for these parameters.
-   *
-   * @param {Object} parameters       The parameters provided.
-   * @returns {{}}                    An object containing a Plugin and Command if found, otherwise null
-   */
-  findCommand(parameters: any) {
-    const { array, options } = parameters
-    const commandPath = array
-    let targetPlugin, targetCommand, rest
-
-    // start with defaultPlugin, then move on to the others
-    const otherPlugins = this.plugins.filter(p => p !== this.defaultPlugin)
-    const plugins = [this.defaultPlugin, ...otherPlugins].filter(p => !isNil(p))
-
-    const { targetPlugin, targetCommand, rest } = findCommand(this, parameters)
-
-    return { plugin: targetPlugin, command: targetCommand, array: rest }
+    return subdirs.map(dir => this.addPlugin(dir, dissoc('matching', options)))
   }
 }
 

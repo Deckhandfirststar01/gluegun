@@ -21,18 +21,18 @@ if (!sniff.isNewEnough) {
 }
 
 // bring in a few extensions to make available for stand-alone purposes
-import attachFilesystemExtension from './core-extensions/filesystem-extension'
-import attachSemverExtension from './core-extensions/semver-extension'
-import attachSystemExtension from './core-extensions/system-extension'
-import attachPromptExtension from './core-extensions/prompt-extension'
-import attachHttpExtension from './core-extensions/http-extension'
-import attachTemplateExtension from './core-extensions/template-extension'
-import attachPatchingExtension from './core-extensions/patching-extension'
+const attachFilesystemExtension = require('./core-extensions/filesystem-extension')
+const attachSemverExtension = require('./core-extensions/semver-extension')
+const attachSystemExtension = require('./core-extensions/system-extension')
+const attachPromptExtension = require('./core-extensions/prompt-extension')
+const attachHttpExtension = require('./core-extensions/http-extension')
+const attachTemplateExtension = require('./core-extensions/template-extension')
+const attachPatchingExtension = require('./core-extensions/patching-extension')
 
 // bring in some context
-import build from './domain/builder'
-import strings from './utils/string-utils'
-import print from './utils/print'
+import { build } from './domain/builder'
+import * as strings from './utils/string-utils'
+import * as print from './utils/print'
 import { printHelp, printCommands } from './utils/print-help'
 
 // we want to see real exceptions with backtraces and stuff
@@ -47,7 +47,7 @@ require('app-module-path').addPath(process.cwd())
 
 // wrap all this in a function call to avoid global scoping
 
-const context = {
+const context: any = {
   build,
   strings,
   print,

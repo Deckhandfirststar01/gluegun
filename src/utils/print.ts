@@ -183,16 +183,4 @@ function spin(config: string | object) {
   return ora(config).start()
 }
 
-export default {
-  info,
-  warning,
-  success,
-  error,
-  debug,
-  fancy,
-  divider,
-  newline,
-  table,
-  spin,
-  colors,
-}
+export { info, warning, success, error, debug, fancy, divider, newline, table, spin, colors }

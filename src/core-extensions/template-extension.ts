@@ -1,8 +1,8 @@
-const ejs = require('ejs')
-const jetpack = require('fs-jetpack')
-const { replace, forEach, keys } = require('ramda')
-const stringUtils = require('../utils/string-utils')
-const { isFile } = require('../utils/filesystem-utils')
+import ejs from 'ejs'
+import jetpack from 'fs-jetpack'
+import { replace, forEach, keys } from 'ramda'
+import * as stringUtils from '../utils/string-utils'
+import { isFile } from '../utils/filesystem-utils'
 
 /**
  * Builds the code generation feature.
@@ -70,4 +70,4 @@ function attach(context) {
   context.template = { generate }
 }
 
-export default attach
+module.exports = attach

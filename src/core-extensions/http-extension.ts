@@ -9,4 +9,4 @@ function attach(context) {
   context.http = { create }
 }
 
-export default attach
+module.exports = attach

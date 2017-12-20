@@ -17,4 +17,4 @@ function attach(context) {
   context.filesystem = extension
 }
 
-export default attach
+module.exports = attach

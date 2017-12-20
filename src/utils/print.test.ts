@@ -1,5 +1,5 @@
 import test from 'ava'
-import sinon from 'sinon'
+import * as sinon from 'sinon'
 import stripAnsi from 'strip-ansi'
 
 // couldn't figure out a way to reset the spy on console.log

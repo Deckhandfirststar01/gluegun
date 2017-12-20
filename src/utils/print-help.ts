@@ -29,4 +29,4 @@ function printHelp(context) {
   print.printCommands(context)
 }
 
-export default { printHelp, printCommands }
+export { printHelp, printCommands }

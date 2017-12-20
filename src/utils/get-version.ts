@@ -6,7 +6,7 @@ import RunContext from '../domain/run-context'
  *
  * @param {RunContext} context
  */
-function getVersion(context: RunContext): string {
+export function getVersion(context: RunContext): string {
   let directory = context.runtime.defaultPlugin && context.runtime.defaultPlugin.directory
   if (!directory) {
     throw new Error('context.version: Unknown CLI version (no src folder found)')
@@ -31,5 +31,3 @@ function getVersion(context: RunContext): string {
   }
   throw new Error(`context.version: Unknown CLI version (no package.json found in ${directory}`)
 }
-
-export default { getVersion }

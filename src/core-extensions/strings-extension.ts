@@ -9,4 +9,4 @@ function attach(context) {
   context.strings = stringUtils
 }
 
-export default attach
+module.exports = attach

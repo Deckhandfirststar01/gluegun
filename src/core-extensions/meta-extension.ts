@@ -14,4 +14,4 @@ function attach(context) {
   context.version = context.meta.version // easier access to version
 }
 
-export default attach
+module.exports = attach

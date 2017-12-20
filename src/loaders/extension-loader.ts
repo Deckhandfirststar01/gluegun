@@ -10,7 +10,7 @@ import Extension from '../domain/extension'
  *
  * @param {string} file         The full path to the file to load.
  */
-function loadExtensionFromFile(file, options = {}) {
+export function loadExtensionFromFile(file, options = {}) {
   const extension = new Extension()
 
   // sanity check the input
@@ -42,5 +42,3 @@ function loadExtensionFromFile(file, options = {}) {
 
   return extension
 }
-
-export default { loadExtensionFromFile }

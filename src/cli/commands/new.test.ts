@@ -1,7 +1,8 @@
 import test from 'ava'
-import sinon from 'sinon'
-import command from './new'
-import strings from '../../utils/string-utils'
+import * as sinon from 'sinon'
+import * as strings from '../../utils/string-utils'
+
+const command = require('./new')
 
 sinon.stub(console, 'log')
 

@@ -8,7 +8,7 @@ import { curry, when } from 'ramda'
  * @param {Function} predicate - The function to invoke
  * @param {*} value - The value to apply to the predicate
  */
-function throwWhen(message, predicate, value) {
+export const throwWhen = curry((message, predicate, value) => {
   when(
     predicate,
     () => {
@@ -16,6 +16,4 @@ function throwWhen(message, predicate, value) {
     },
     value,
   )
-}
-
-export default curry(throwWhen)
+})

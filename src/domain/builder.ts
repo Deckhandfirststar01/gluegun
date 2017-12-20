@@ -1,12 +1,11 @@
 import Runtime from '../runtime/runtime'
-import { dissoc } from 'ramda'
 
 /**
  * Provides a cleaner way to build a runtime.
  *
  * @class Builder
  */
-class Builder {
+export class Builder {
   runtime: Runtime
 
   constructor() {
@@ -109,11 +108,18 @@ class Builder {
     this.runtime.addCommand(command)
     return this
   }
+
+  /**
+   * Hand over the runtime.
+   */
+  create(): Runtime {
+    return this.runtime
+  }
 }
 
 /**
  * Export it as a factory function.
  */
-export default function build() {
+export function build(): Builder {
   return new Builder()
 }

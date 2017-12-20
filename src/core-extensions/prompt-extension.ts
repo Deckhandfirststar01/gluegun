@@ -38,4 +38,4 @@ function attach(context) {
   context.prompt = enquirer
 }
 
-export default attach
+module.exports = attach

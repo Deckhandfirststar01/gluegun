@@ -1,5 +1,8 @@
 import { pipe, map, sortBy, prop, propEq, reject, replace, unnest, equals } from 'ramda'
 
+import RunContext from '../domain/run-context'
+import Plugin from '../domain/plugin'
+
 /**
  * Is this a hidden command?
  */
@@ -13,7 +16,7 @@ const isHidden = propEq('hidden', true)
  * @param {string[]} commandRoot   Optional, only show commands with this root
  * @return {[string, string]}
  */
-function commandInfo(context, plugins, commandRoot) {
+export function commandInfo(context: RunContext, plugins?: Plugin[], commandRoot?: string[]) {
   return pipe(reject(isHidden), sortBy(prop('name')), map(p => getListOfCommands(context, p, commandRoot)), unnest)(
     plugins || context.runtime.plugins,
   )
@@ -27,7 +30,7 @@ function commandInfo(context, plugins, commandRoot) {
  * @param {string[]} commandRoot   Optional, only show commands with this root
  * @return {[string, string]}
  */
-function getListOfCommands(context, plugin, commandRoot) {
+export function getListOfCommands(context: RunContext, plugin?: Plugin, commandRoot?: string[]) {
   return pipe(
     reject(isHidden),
     reject(command => {
@@ -45,5 +48,3 @@ function getListOfCommands(context, plugin, commandRoot) {
     }),
   )(plugin.commands)
 }
-
-export default { commandInfo }

@@ -1,6 +1,6 @@
 import { isBlank } from '../utils/string-utils'
 import { isNotFile } from '../utils/filesystem-utils'
-import throwWhen from '../utils/throw-when'
+import { throwWhen } from '../utils/throw-when'
 
 // try loading this module
 function loadModule(path) {

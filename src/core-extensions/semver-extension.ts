@@ -12,4 +12,4 @@ function attach(context) {
   context.semver = extension
 }
 
-export default attach
+module.exports = attach

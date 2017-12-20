@@ -1,9 +1,9 @@
-const { build } = require('../index.js')
+const { build } = require('../index')
 
 /**
  * Create the cli and kick it off
  */
-async function run (argv) {
+async function run(argv) {
   // create a CLI runtime
   const cli = build()
     .brand('gluegun')

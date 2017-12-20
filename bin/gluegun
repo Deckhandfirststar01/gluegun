@@ -1,2 +1,7 @@
 #!/usr/bin/env node
-require(`${__dirname}/../src/cli/cli.js`)(process.argv);
+
+// hook into ts-node so we can run typescript on the fly
+require('ts-node').register({ project: `${__dirname}/../tsconfig.json` })
+
+// kick off gluegun
+require(`${__dirname}/../src/cli/cli`)(process.argv)

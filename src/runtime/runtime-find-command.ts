@@ -1,4 +1,6 @@
-function findCommand (runtime, parameters) {
+// TODODOOOOOOO
+
+export default function findCommand(runtime, parameters) {
   return find(plugin => {
     if (isNil(plugin) || isNilOrEmpty(plugin.commands)) return false
 
@@ -10,12 +12,10 @@ function findCommand (runtime, parameters) {
       // find a command that fits the previous path + currentName, which can be an alias
       const cmd = find(
         command => {
-          return (
-            equals(command.commandPath.slice(0, -1), prevPath) && command.matchesAlias(currName)
-          )
+          return equals(command.commandPath.slice(0, -1), prevPath) && command.matchesAlias(currName)
         },
         // sorted shortest path to longest
-        sort((a, b) => a.commandPath.length - b.commandPath.length, plugin.commands)
+        sort((a, b) => a.commandPath.length - b.commandPath.length, plugin.commands),
       )
 
       if (cmd) {
@@ -37,10 +37,7 @@ function findCommand (runtime, parameters) {
         return dashMatch || isDefault
       }, plugin.commands)
     } else {
-      targetCommand = find(
-        command => equals(command.commandPath, finalCommandPath),
-        plugin.commands
-      )
+      targetCommand = find(command => equals(command.commandPath, finalCommandPath), plugin.commands)
     }
 
     // Did we find the targetCommand?

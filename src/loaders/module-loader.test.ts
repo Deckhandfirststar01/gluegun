@@ -1,9 +1,8 @@
-const test = require('ava')
-const loadModule = require('./module-loader')
-const { keys } = require('ramda')
+import test from 'ava'
+import loadModule from './module-loader'
+import { keys } from 'ramda'
 
 test('handles weird input', t => {
-  t.throws(() => loadModule())
   t.throws(() => loadModule(''))
   t.throws(() => loadModule(1))
   t.throws(() => loadModule(1.1))
@@ -44,13 +43,13 @@ test('handles files with an object', t => {
   t.deepEqual(keys(m), [])
 })
 
-test('module.exports = function', t => {
+test('export default function', t => {
   const m = loadModule(`${__dirname}/../fixtures/good-modules/module-exports-function.js`)
   t.is(typeof m, 'function')
   t.is(m(), 'hi')
 })
 
-test('module.exports = {}', async t => {
+test('export default {}', async t => {
   const m = loadModule(`${__dirname}/../fixtures/good-modules/module-exports-object.js`)
   t.is(typeof m, 'object')
   t.is(await m.hi(), 'hi')

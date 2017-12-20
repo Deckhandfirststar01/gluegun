@@ -1,6 +1,6 @@
-const { map } = require('ramda')
-const jetpack = require('fs-jetpack')
-const { isDirectory } = require('../utils/filesystem-utils')
+import { map } from 'ramda'
+import jetpack from 'fs-jetpack'
+import { isDirectory } from '../utils/filesystem-utils'
 
 /**
  * Gets a list of fully qualified directories from the user's home directory.
@@ -8,9 +8,9 @@ const { isDirectory } = require('../utils/filesystem-utils')
  * @param  {string} brand The brand controls the subdirectory off of $HOME
  * @return {string[]}     A string list of directories.
  */
-module.exports = function (brand) {
+export default function(brand) {
   // load plugins from the $HOME/.<brand>/plugins
-  const isWindows = process.platform === /^win/.test(process.platform)
+  const isWindows = /^win/.test(process.platform)
   const homeDir = process.env[isWindows ? 'USERPROFILE' : 'HOME']
   const homePluginsDir = `${homeDir}/.${brand}/plugins`
 

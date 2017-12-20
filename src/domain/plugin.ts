@@ -1,8 +1,18 @@
+import Command from './command'
+
 /**
  * Extends the environment with new commands.
  */
 class Plugin {
-  constructor () {
+  name?: string
+  description?: string
+  defaults: object
+  directory?: string
+  hidden: boolean
+  commands: Command[]
+  extensions: object[]
+
+  constructor() {
     this.name = null
     this.description = null
     this.defaults = {}
@@ -16,4 +26,4 @@ class Plugin {
   }
 }
 
-module.exports = Plugin
+export default Plugin

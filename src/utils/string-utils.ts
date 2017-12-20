@@ -1,20 +1,21 @@
-const { always, is, isEmpty, pipe, when } = require('ramda')
-const camelCase = require('lodash.camelcase')
-const kebabCase = require('lodash.kebabcase')
-const snakeCase = require('lodash.snakecase')
-const upperCase = require('lodash.uppercase')
-const lowerCase = require('lodash.lowercase')
-const startCase = require('lodash.startcase')
-const upperFirst = require('lodash.upperfirst')
-const lowerFirst = require('lodash.lowerfirst')
-const pad = require('lodash.pad')
-const padStart = require('lodash.padstart')
-const padEnd = require('lodash.padend')
-const trim = require('lodash.trim')
-const trimStart = require('lodash.trimstart')
-const trimEnd = require('lodash.trimend')
-const repeat = require('lodash.repeat')
-const pluralize = require('pluralize')
+import { always, is, isEmpty, pipe, when } from 'ramda'
+import camelCase from 'lodash.camelcase'
+import kebabCase from 'lodash.kebabcase'
+import snakeCase from 'lodash.snakecase'
+import upperCase from 'lodash.uppercase'
+import lowerCase from 'lodash.lowercase'
+import startCase from 'lodash.startcase'
+import upperFirst from 'lodash.upperfirst'
+import lowerFirst from 'lodash.lowerfirst'
+import pad from 'lodash.pad'
+import padStart from 'lodash.padstart'
+import padEnd from 'lodash.padend'
+import trim from 'lodash.trim'
+import trimStart from 'lodash.trimstart'
+import trimEnd from 'lodash.trimend'
+import repeat from 'lodash.repeat'
+import pluralize from 'pluralize'
+
 const {
   plural,
   singular,
@@ -23,7 +24,7 @@ const {
   addIrregularRule,
   addUncountableRule,
   isPlural,
-  isSingular
+  isSingular,
 } = pluralize
 
 /**
@@ -54,7 +55,7 @@ const isBlank = value => {
  * @param {any} value
  * @returns     the value.
  */
-function identity (value) {
+function identity(value) {
   return value
 }
 
@@ -64,11 +65,11 @@ function identity (value) {
  * @param {string} value The string to convert
  * @returns {string}
  */
-function pascalCase (value) {
+function pascalCase(value) {
   return pipe(camelCase, upperFirst)(value)
 }
 
-module.exports = {
+export default {
   identity,
   isBlank,
   isNotString,
@@ -96,5 +97,5 @@ module.exports = {
   addIrregularRule,
   addUncountableRule,
   isPlural,
-  isSingular
+  isSingular,
 }

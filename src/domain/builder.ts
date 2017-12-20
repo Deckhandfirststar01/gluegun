@@ -1,5 +1,5 @@
-const Runtime = require('../runtime/runtime')
-const { dissoc } = require('ramda')
+import Runtime from '../runtime/runtime'
+import { dissoc } from 'ramda'
 
 /**
  * Provides a cleaner way to build a runtime.
@@ -7,17 +7,19 @@ const { dissoc } = require('ramda')
  * @class Builder
  */
 class Builder {
-  constructor () {
+  runtime: Runtime
+
+  constructor() {
     this.runtime = new Runtime()
   }
 
   /**
-   * Set the brand.
+   * Ideally named after the command line, the brand will be used
+   * when searching for configuration files.
    *
-   * @value {string} The brand.
-   * @return {Builder} self.
+   * @param name The name should be all lowercase and contains only numbers, letters, and dashes.
    */
-  brand (value) {
+  brand(value: string): Builder {
     this.runtime.brand = value
     return this
   }
@@ -25,11 +27,11 @@ class Builder {
   /**
    * Specifies where the default commands and extensions live.
    *
-   * @param  {string}  value   The default plugin directory.
-   * @param  {Object}  options Additional loading options.
-   * @return {Builder}         self.
+   * @param value The path to the source directory.
+   * @param options Additional plugin loading options.
+   * @return {Builder} self.
    */
-  src (value, options = {}) {
+  src(value: string, options?: object = {}): Builder {
     this.runtime.src(value, options)
     return this
   }
@@ -41,7 +43,7 @@ class Builder {
    * @param  {Object}  options Additional loading options.
    * @return {Builder}         self.
    */
-  plugin (value, options = {}) {
+  plugin(value: string, options: object = {}) {
     this.runtime.plugin(value, options)
     return this
   }
@@ -53,8 +55,8 @@ class Builder {
    * @param  {Object}  options Additional loading options.
    * @return {Builder}         self.
    */
-  plugins (value, options = {}) {
-    this.runtime.plugins(value, entry)
+  plugins(value: string, options: object = {}) {
+    this.runtime.plugins(value, options)
     return this
   }
 
@@ -63,7 +65,7 @@ class Builder {
    * @param  {any} command An optional command function or object
    * @return {Builder}         self.
    */
-  help (command) {
+  help(command: any) {
     command = command || require(`../core-commands/help`)
     if (typeof command === 'function') {
       command = { name: 'help', alias: ['h'], dashed: true, run: command }
@@ -76,7 +78,7 @@ class Builder {
    * @param  {any} command An optional command function or object
    * @return {Builder}         self.
    */
-  version (command) {
+  version(command: any) {
     command = command || require(`../core-commands/version`)
     if (typeof command === 'function') {
       command = { name: 'version', alias: ['v'], dashed: true, run: command }
@@ -89,7 +91,7 @@ class Builder {
    * @param  {any} command An optional command function or object
    * @return {Builder}         self.
    */
-  defaultCommand (command) {
+  defaultCommand(command: any) {
     command = command || require(`../core-commands/default`)
     if (typeof command === 'function') {
       command = { run: command }
@@ -103,7 +105,7 @@ class Builder {
    * @param {Object}
    * @return {Builder}
    */
-  command (command) {
+  command(command: object) {
     this.runtime.command(command)
     return this
   }
@@ -112,6 +114,6 @@ class Builder {
 /**
  * Export it as a factory function.
  */
-module.exports = function build () {
+export default function build() {
   return new Builder()
 }

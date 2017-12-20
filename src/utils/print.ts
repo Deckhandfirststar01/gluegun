@@ -1,6 +1,6 @@
-const colors = require('colors')
-const ora = require('ora')
-const CLITable = require('cli-table2')
+import colors from 'colors'
+import ora from 'ora'
+import * as CLITable from 'cli-table2'
 
 const CLI_TABLE_COMPACT = {
   top: '',
@@ -17,13 +17,13 @@ const CLI_TABLE_COMPACT = {
   'mid-mid': '',
   right: '',
   'right-mid': '',
-  middle: ' '
+  middle: ' ',
 }
 
 const CLI_TABLE_MARKDOWN = Object.assign({}, CLI_TABLE_COMPACT, {
   left: '|',
   right: '|',
-  middle: '|'
+  middle: '|',
 })
 
 /**
@@ -36,37 +36,37 @@ colors.setTheme({
   success: 'green',
   error: 'red',
   line: 'grey',
-  muted: 'grey'
+  muted: 'grey',
 })
 
 /**
  * Print a blank line.
  */
-function newline () {
+function newline() {
   console.log('')
 }
 
 /**
  * Prints a divider line
  */
-function divider () {
+function divider() {
   console.log(colors.line('---------------------------------------------------------------'))
 }
 
 /**
  * Returns an array of the column widths.
  */
-function findWidths (table) {
+function findWidths(table) {
   return [table.options.head, ...table].reduce(
     (colWidths, row) => row.map((str, i) => Math.max(`${str}`.length + 1, colWidths[i] || 1)),
-    []
+    [],
   )
 }
 
 /**
  * Returns an array of column headers based on column widths.
  */
-function columnHeaderDivider (table) {
+function columnHeaderDivider(table) {
   return findWidths(table).map(w => Array(w).join('-'))
 }
 
@@ -76,14 +76,14 @@ function columnHeaderDivider (table) {
  *
  * @param {{}} object The object to turn into a table.
  */
-function table (data, options) {
+function table(data: string[][], options: any = {}) {
   let t
-  switch (options && options.format) {
+  switch (options.format) {
     case 'markdown':
       const header = data.shift()
       t = new CLITable({
         head: header,
-        chars: CLI_TABLE_MARKDOWN
+        chars: CLI_TABLE_MARKDOWN,
       })
       t.push(...data)
       t.unshift(columnHeaderDivider(t))
@@ -94,7 +94,7 @@ function table (data, options) {
       break
     default:
       t = new CLITable({
-        chars: CLI_TABLE_COMPACT
+        chars: CLI_TABLE_COMPACT,
       })
       t.push(...data)
   }
@@ -109,7 +109,7 @@ function table (data, options) {
  *
  * @param {string} message The message to write.
  */
-function fancy (message) {
+function fancy(message: string) {
   console.log(message)
 }
 
@@ -120,7 +120,7 @@ function fancy (message) {
  *
  * @param {string} message The message to show.
  */
-function info (message) {
+function info(message: string) {
   console.log(colors.info(message))
 }
 
@@ -131,7 +131,7 @@ function info (message) {
  *
  * @param {string} message The message to show.
  */
-function error (message) {
+function error(message: string) {
   console.log(colors.error(message))
 }
 
@@ -142,7 +142,7 @@ function error (message) {
  *
  * @param {string} message The message to show.
  */
-function warning (message) {
+function warning(message: string) {
   console.log(colors.warning(message))
 }
 
@@ -153,7 +153,7 @@ function warning (message) {
  *
  * @param {string} message The message to show.
  */
-function debug (message, title = 'DEBUG') {
+function debug(message: string, title: string = 'DEBUG') {
   const topLine = `vvv -----[ ${title} ]----- vvv`
   const botLine = `^^^ -----[ ${title} ]----- ^^^`
 
@@ -169,7 +169,7 @@ function debug (message, title = 'DEBUG') {
  *
  * @param {string} message The message to show.
  */
-function success (message) {
+function success(message: string) {
   console.log(colors.success(message))
 }
 
@@ -179,11 +179,11 @@ function success (message) {
  * @param {string|Object} config The text for the spinner or an ora configuration object.
  * @returns The spinner.
  */
-function spin (config) {
+function spin(config: string | object) {
   return ora(config).start()
 }
 
-module.exports = {
+export default {
   info,
   warning,
   success,
@@ -194,5 +194,5 @@ module.exports = {
   newline,
   table,
   spin,
-  colors
+  colors,
 }

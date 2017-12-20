@@ -1,8 +1,8 @@
-const test = require('ava')
-const createExtension = require('./filesystem-extension')
-const os = require('os')
-const path = require('path')
-const { split } = require('ramda')
+import test from 'ava'
+import createExtension from './filesystem-extension'
+import * as os from 'os'
+import * as path from 'path'
+import { split } from 'ramda'
 
 test('has the proper interface', t => {
   const context = {}
@@ -15,7 +15,7 @@ test('has the proper interface', t => {
   t.is(typeof ext.copy, 'function')
   t.is(typeof ext.path, 'function')
   t.is(typeof ext.subdirectories, 'function')
-  t.is(split('\n', ext.read(__filename))[0], "const test = require('ava')")
+  t.is(split('\n', ext.read(__filename))[0], "import test from 'ava'")
   // the extra values we've added
   t.is(ext.eol, os.EOL)
   t.is(ext.separator, path.sep)

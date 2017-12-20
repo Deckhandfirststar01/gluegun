@@ -1,4 +1,4 @@
-const { build } = require('../index')
+import { build } from '../index'
 
 /**
  * Create the cli and kick it off
@@ -19,4 +19,4 @@ async function run(argv) {
   return context
 }
 
-module.exports = run
+export default run

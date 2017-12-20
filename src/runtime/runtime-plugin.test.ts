@@ -1,5 +1,5 @@
-const test = require('ava')
-const Runtime = require('./runtime')
+import test from 'ava'
+import Runtime from './runtime'
 
 const BAD_PLUGIN_PATH = `${__dirname}/../fixtures/does-not-exist`
 

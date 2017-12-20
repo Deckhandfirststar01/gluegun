@@ -1,5 +1,5 @@
-const test = require('ava')
-const Runtime = require('./runtime')
+import test from 'ava'
+import Runtime from './runtime'
 
 test('can read from config', async t => {
   const r = new Runtime()

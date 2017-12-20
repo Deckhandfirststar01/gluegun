@@ -1,5 +1,19 @@
+import Plugin from './plugin'
+import Command from './command'
+import Runtime from '../runtime/runtime'
+
 class RunContext {
-  constructor () {
+  result?: any
+  error?: any
+  config: object
+  parameters: object
+  plugin?: Plugin
+  command?: Command
+  pluginName?: string
+  commandName?: string
+  runtime?: Runtime
+
+  constructor() {
     /**
      * The result of the run command.
      */
@@ -22,4 +36,4 @@ class RunContext {
   }
 }
 
-module.exports = RunContext
+export default RunContext

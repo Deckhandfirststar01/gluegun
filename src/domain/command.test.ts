@@ -1,5 +1,5 @@
-const test = require('ava')
-const Command = require('./command')
+import test from 'ava'
+import Command from './command'
 
 test('default state', t => {
   const command = new Command()

@@ -1,6 +1,6 @@
-const test = require('ava')
-const { loadPluginFromDirectory } = require('./plugin-loader')
-const { find, propEq } = require('ramda')
+import test from 'ava'
+import { loadPluginFromDirectory } from './plugin-loader'
+import { find, propEq } from 'ramda'
 
 test('deals with weird input', t => {
   t.throws(() => loadPluginFromDirectory())
@@ -86,7 +86,7 @@ test('names default to the filename', async t => {
 
 test('plugin names can be overridden', async t => {
   const plugin = loadPluginFromDirectory(`${__dirname}/../fixtures/good-plugins/auto-detect`, {
-    name: 'override'
+    name: 'override',
   })
   t.is(plugin.name, 'override')
 })

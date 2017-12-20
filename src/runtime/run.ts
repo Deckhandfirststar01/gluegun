@@ -1,4 +1,7 @@
-const RunContext = require('./run-context')
+import { parseParams, createParams } from '../utils/cli/normalize-params'
+import RunContext from '../domain/run-context'
+import Runtime from './runtime'
+import { isNil } from 'ramdasauce'
 
 /**
  * Runs a command.
@@ -7,7 +10,7 @@ const RunContext = require('./run-context')
  * @param  {{}} extraOptions Additional options use to execute a command.
  * @return {RunContext} The RunContext object indicating what happened.
  */
-async function run (rawCommand, extraOptions = {}) {
+async function run(this: Runtime, rawCommand: string | object, extraOptions = {}): Promise<RunContext> {
   // use provided rawCommand or process arguments if none given
   rawCommand = rawCommand || process.argv
 
@@ -33,7 +36,7 @@ async function run (rawCommand, extraOptions = {}) {
     array: array,
     options: context.parameters.options,
     raw: rawCommand,
-    argv: process.argv
+    argv: process.argv,
   })
 
   // set a few properties
@@ -46,7 +49,7 @@ async function run (rawCommand, extraOptions = {}) {
   context.config = clone(this.config)
   context.config[context.plugin.name] = merge(
     context.plugin.defaults,
-    (this.defaults && this.defaults[context.plugin.name]) || {}
+    (this.defaults && this.defaults[context.plugin.name]) || {},
   )
 
   // kick it off
@@ -60,3 +63,5 @@ async function run (rawCommand, extraOptions = {}) {
 
   return context
 }
+
+export default run

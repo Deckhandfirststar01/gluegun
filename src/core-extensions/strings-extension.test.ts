@@ -1,5 +1,5 @@
-const test = require('ava')
-const createExtension = require('./strings-extension')
+import test from 'ava'
+import createExtension from './strings-extension'
 
 test('has the proper interface', t => {
   const context = {}

@@ -1,16 +1,16 @@
-const { isNotFile } = require('../utils/filesystem-utils')
-const { isBlank } = require('../utils/string-utils')
-const loadModule = require('./module-loader')
-const jetpack = require('fs-jetpack')
-const { head, split } = require('ramda')
-const Extension = require('../domain/extension')
+import { isNotFile } from '../utils/filesystem-utils'
+import { isBlank } from '../utils/string-utils'
+import loadModule from './module-loader'
+import jetpack from 'fs-jetpack'
+import { head, split } from 'ramda'
+import Extension from '../domain/extension'
 
 /**
  * Loads the extension from a file.
  *
  * @param {string} file         The full path to the file to load.
  */
-function loadExtensionFromFile (file, options = {}) {
+function loadExtensionFromFile(file, options = {}) {
   const extension = new Extension()
 
   // sanity check the input
@@ -37,12 +37,10 @@ function loadExtensionFromFile (file, options = {}) {
   if (valid) {
     extension.setup = extensionModule
   } else {
-    throw new Error(
-      `Error: couldn't load ${extension.name}. Expected a function, got ${extensionModule}.`
-    )
+    throw new Error(`Error: couldn't load ${extension.name}. Expected a function, got ${extensionModule}.`)
   }
 
   return extension
 }
 
-module.exports = { loadExtensionFromFile }
+export default { loadExtensionFromFile }

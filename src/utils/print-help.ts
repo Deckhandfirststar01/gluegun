@@ -1,5 +1,5 @@
-const print = require('./print')
-const { commandInfo } = require('./command-info')
+import print from './print'
+import { commandInfo } from './command-info'
 
 /**
  * Prints the list of commands.
@@ -7,7 +7,7 @@ const { commandInfo } = require('./command-info')
  * @param {RunContext} context     The context that was used
  * @param {string[]} commandRoot   Optional, only show commands with this root
  */
-function printCommands (context, commandRoot) {
+function printCommands(context, commandRoot) {
   let printPlugins = []
   if (context.plugin === context.defaultPlugin) {
     // print for all plugins
@@ -23,10 +23,10 @@ function printCommands (context, commandRoot) {
   print.table(data) // the data
 }
 
-function printHelp (context) {
+function printHelp(context) {
   const { print, runtime: { brand } } = context
   print.info(`${brand} version ${context.meta.version()}`)
   print.printCommands(context)
 }
 
-module.exports = { printHelp, printCommands }
+export default { printHelp, printCommands }

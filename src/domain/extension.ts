@@ -2,7 +2,7 @@
  * An extension will add functionality to the context that each command will receive.
  */
 class Extension {
-  constructor () {
+  constructor() {
     this.name = null
     this.description = null
     this.file = null
@@ -10,4 +10,4 @@ class Extension {
   }
 }
 
-module.exports = Extension
+export default Extension

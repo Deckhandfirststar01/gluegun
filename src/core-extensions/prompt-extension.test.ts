@@ -1,5 +1,5 @@
-const test = require('ava')
-const createExtension = require('./prompt-extension')
+import test from 'ava'
+import createExtension from './prompt-extension'
 
 test('has the proper interface', t => {
   const context = {}

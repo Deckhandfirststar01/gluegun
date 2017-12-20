@@ -1,7 +1,7 @@
-const test = require('ava')
-const jetpack = require('fs-jetpack')
-const tempWrite = require('temp-write')
-const create = require('./patching-extension')
+import test from 'ava'
+import jetpack from 'fs-jetpack'
+import tempWrite from 'temp-write'
+import create from './patching-extension'
 
 // const { startsWith } = require('ramdasauce')
 
@@ -131,7 +131,7 @@ test('replace - replaces text in a text file', async t => {
 test('patch - replaces text in a text file', async t => {
   const updated = await patching.patch(t.context.textFile, {
     replace: 'very amazing',
-    insert: 'patched info'
+    insert: 'patched info',
   })
 
   // returned the updated object
@@ -146,7 +146,7 @@ test('patch - replaces text in a text file', async t => {
 test('patch - adds text before other text in a text file', async t => {
   const updated = await patching.patch(t.context.textFile, {
     before: 'very amazing',
-    insert: 'patched info '
+    insert: 'patched info ',
   })
 
   // returned the updated object
@@ -161,7 +161,7 @@ test('patch - adds text before other text in a text file', async t => {
 test('patch - adds text after other text in a text file', async t => {
   const updated = await patching.patch(t.context.textFile, {
     after: 'some words',
-    insert: ' patched info'
+    insert: ' patched info',
   })
 
   // returned the updated object
@@ -175,7 +175,7 @@ test('patch - adds text after other text in a text file', async t => {
 
 test('patch - deletes text in a text file', async t => {
   const updated = await patching.patch(t.context.textFile, {
-    delete: 'some words'
+    delete: 'some words',
   })
 
   // returned the updated object

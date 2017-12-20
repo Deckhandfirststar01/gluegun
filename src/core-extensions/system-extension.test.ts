@@ -1,5 +1,5 @@
-const test = require('ava')
-const create = require('./system-extension')
+import test from 'ava'
+import create from './system-extension'
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 

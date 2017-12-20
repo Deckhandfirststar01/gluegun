@@ -12,7 +12,7 @@
 // ----------------------------------------------------------------------------
 
 // first, do a sniff test to ensure our dependencies are met
-const sniff = require('../sniff')
+import sniff from '../sniff'
 
 // check the node version
 if (!sniff.isNewEnough) {
@@ -59,4 +59,4 @@ function setupGluegun() {
 }
 
 // export our API
-module.exports = setupGluegun()
+export default setupGluegun()

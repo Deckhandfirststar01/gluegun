@@ -1,9 +1,9 @@
-const { isNotFile } = require('../utils/filesystem-utils')
-const { isBlank } = require('../utils/string-utils')
-const loadModule = require('./module-loader')
-const jetpack = require('fs-jetpack')
-const { head, split, is, reject, isNil, takeLast, last } = require('ramda')
-const Command = require('../domain/command')
+import { isNotFile } from '../utils/filesystem-utils'
+import { isBlank } from '../utils/string-utils'
+import loadModule from './module-loader'
+import jetpack from 'fs-jetpack'
+import { head, split, is, reject, isNil, takeLast, last } from 'ramda'
+import Command from '../domain/command'
 
 /**
  * Loads the command from the given file.
@@ -11,7 +11,7 @@ const Command = require('../domain/command')
  * @param  {string} file      The full path to the file to load.
  * @return {Command}          The command in any condition
  */
-function loadCommandFromFile (file, options = {}) {
+function loadCommandFromFile(file, options = {}) {
   const command = new Command()
 
   // sanity check the input
@@ -30,7 +30,7 @@ function loadCommandFromFile (file, options = {}) {
   command.name = head(split('.', jetpack.inspect(file).name))
   // strip the extension from the end of the commandPath
   command.commandPath = (options.commandPath || last(file.split('/commands/')).split('/')).map(
-    f => ([`${command.name}.js`, `${command.name}.ts`].includes(f) ? command.name : f)
+    f => ([`${command.name}.js`, `${command.name}.ts`].includes(f) ? command.name : f),
   )
 
   // if the last two elements of the commandPath are the same, remove the last one
@@ -43,28 +43,22 @@ function loadCommandFromFile (file, options = {}) {
   const commandModule = loadModule(file)
 
   // are we expecting this?
-  const valid =
-    commandModule && typeof commandModule === 'object' && typeof commandModule.run === 'function'
+  const valid = commandModule && typeof commandModule === 'object' && typeof commandModule.run === 'function'
 
   if (valid) {
     command.name = commandModule.name || last(command.commandPath)
     command.description = commandModule.description
     command.hidden = Boolean(commandModule.hidden)
-    command.alias = reject(
-      isNil,
-      is(Array, commandModule.alias) ? commandModule.alias : [commandModule.alias]
-    )
+    command.alias = reject(isNil, is(Array, commandModule.alias) ? commandModule.alias : [commandModule.alias])
     command.run = commandModule.run
   } else {
-    throw new Error(
-      `Error: Couldn't load command ${command.name} -- needs a "run" property with a function.`
-    )
+    throw new Error(`Error: Couldn't load command ${command.name} -- needs a "run" property with a function.`)
   }
 
   return command
 }
 
-function loadCommandFromPreload (preload) {
+function loadCommandFromPreload(preload) {
   const command = new Command()
   command.name = preload.name
   command.description = preload.description
@@ -77,4 +71,4 @@ function loadCommandFromPreload (preload) {
   return command
 }
 
-module.exports = { loadCommandFromFile, loadCommandFromPreload }
+export default { loadCommandFromFile, loadCommandFromPreload }

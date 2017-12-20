@@ -1,5 +1,5 @@
-const test = require('ava')
-const RunContext = require('./run-context')
+import test from 'ava'
+import RunContext from './run-context'
 
 test('initial state', t => {
   const ctx = new RunContext()

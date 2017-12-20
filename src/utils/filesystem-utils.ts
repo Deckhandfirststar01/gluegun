@@ -1,6 +1,6 @@
-const jetpack = require('fs-jetpack')
-const { map, concat, complement } = require('ramda')
-const { isBlank } = require('./string-utils')
+import jetpack from 'fs-jetpack'
+import { map, concat, complement } from 'ramda'
+import { isBlank } from './string-utils'
 
 /**
  * Is this a file?
@@ -50,7 +50,7 @@ const subdirectories = (base, isRelative, matching = '*', symlinks = false) => {
     directories: true,
     recursive: false,
     files: false,
-    symlinks
+    symlinks,
   })
   if (isRelative) {
     return dirs
@@ -59,10 +59,10 @@ const subdirectories = (base, isRelative, matching = '*', symlinks = false) => {
   }
 }
 
-module.exports = {
+export default {
   isFile,
   isNotFile,
   isDirectory,
   isNotDirectory,
-  subdirectories
+  subdirectories,
 }

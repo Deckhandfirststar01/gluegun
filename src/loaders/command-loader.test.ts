@@ -1,5 +1,5 @@
-const test = require('ava')
-const { loadCommandFromFile, loadCommandFromPreload } = require('./command-loader')
+import test from 'ava'
+import { loadCommandFromFile, loadCommandFromPreload } from './command-loader'
 
 test('loading from a missing file', async t => {
   const error = await t.throws(() => loadCommandFromFile('foo.js'), Error)
@@ -20,10 +20,7 @@ test('open a weird js file', async t => {
 test('default but no run property exported', async t => {
   const file = `${__dirname}/../fixtures/good-modules/module-exports-object.js`
   const error = await t.throws(() => loadCommandFromFile(file), Error)
-  t.is(
-    error.message,
-    `Error: Couldn't load command module-exports-object -- needs a "run" property with a function.`
-  )
+  t.is(error.message, `Error: Couldn't load command module-exports-object -- needs a "run" property with a function.`)
 })
 
 test('fat arrows', async t => {
@@ -37,7 +34,7 @@ test('load command from preload', async t => {
     description: 'yiss dream',
     alias: ['z'],
     dashed: true,
-    run: context => 'ran!'
+    run: context => 'ran!',
   })
 
   t.is(command.name, 'hello')

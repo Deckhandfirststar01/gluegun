@@ -1,4 +1,5 @@
-const test = require('ava')
+import test from 'ava'
+import stringUtils from './string-utils'
 const {
   identity,
   isBlank,
@@ -27,8 +28,8 @@ const {
   addIrregularRule,
   addUncountableRule,
   isPlural,
-  isSingular
-} = require('./string-utils')
+  isSingular,
+} = stringUtils
 
 test('isBlank', t => {
   t.true(isBlank())

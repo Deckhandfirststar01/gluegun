@@ -1,6 +1,8 @@
-const test = require('ava')
-let context = {}
-require('./print-extension')(context)
+import test from 'ava'
+import printExtension from './print-extension'
+
+let context: any = {}
+printExtension(context)
 
 const { print } = context
 

@@ -1,5 +1,5 @@
-const test = require('ava')
-const build = require('./builder')
+import test from 'ava'
+import build from './builder'
 
 test('the gauntlet', t => {
   const brand = 'test'
@@ -11,7 +11,7 @@ test('the gauntlet', t => {
     .version({
       name: 'gimmedatversion',
       alias: ['version', 'v'],
-      run: context => 'it works'
+      run: context => 'it works',
     })
     .defaultCommand()
     .plugin(`${__dirname}/../fixtures/good-plugins/simplest`)

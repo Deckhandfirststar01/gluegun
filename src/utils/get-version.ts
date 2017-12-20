@@ -1,11 +1,12 @@
-const jetpack = require('fs-jetpack')
+import jetpack from 'fs-jetpack'
+import RunContext from '../domain/run-context'
 
 /**
  * Finds the version for the currently running CLI.
  *
  * @param {RunContext} context
  */
-function getVersion (context) {
+function getVersion(context: RunContext): string {
   let directory = context.runtime.defaultPlugin && context.runtime.defaultPlugin.directory
   if (!directory) {
     throw new Error('context.version: Unknown CLI version (no src folder found)')
@@ -31,4 +32,4 @@ function getVersion (context) {
   throw new Error(`context.version: Unknown CLI version (no package.json found in ${directory}`)
 }
 
-module.exports = { getVersion }
+export default { getVersion }

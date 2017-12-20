@@ -1,9 +1,9 @@
-const { isBlank } = require('../utils/string-utils')
-const { isNotFile } = require('../utils/filesystem-utils')
-const throwWhen = require('../utils/throw-when')
+import { isBlank } from '../utils/string-utils'
+import { isNotFile } from '../utils/filesystem-utils'
+import throwWhen from '../utils/throw-when'
 
 // try loading this module
-function loadModule (path) {
+function loadModule(path) {
   throwWhen('path is required', isBlank, path)
   throwWhen(`${path} is not a file`, isNotFile, path)
 
@@ -11,4 +11,4 @@ function loadModule (path) {
   return require(path)
 }
 
-module.exports = loadModule
+export default loadModule

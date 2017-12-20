@@ -1,12 +1,6 @@
-const test = require('ava')
-const {
-  isFile,
-  isNotFile,
-  isDirectory,
-  isNotDirectory,
-  subdirectories
-} = require('./filesystem-utils')
-const { contains } = require('ramda')
+import test from 'ava'
+import { isFile, isNotFile, isDirectory, isNotDirectory, subdirectories } from './filesystem-utils'
+import { contains } from 'ramda'
 
 test('isFile', t => {
   t.true(isFile(__filename))

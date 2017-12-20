@@ -9,7 +9,7 @@ const crossSpawn = require('cross-spawn')
  *
  * @param  {RunContext} context The running context.
  */
-module.exports = function (context) {
+export default function(context) {
   /**
    * Executes a commandline program asynchronously.
    *
@@ -17,7 +17,7 @@ module.exports = function (context) {
    * @param {options} options Additional child_process options for node.
    * @returns {Promise}
    */
-  async function run (commandLine, options = {}) {
+  async function run(commandLine, options = {}) {
     const trimmer = options && options.trim ? trim : identity
     const nodeOptions = dissoc('trim', options)
 
@@ -39,7 +39,7 @@ module.exports = function (context) {
    * @param {options} options Additional child_process options for node.
    * @returns {Promise}
    */
-  async function exec (commandLine, options) {
+  async function exec(commandLine, options) {
     return new Promise((resolve, reject) => {
       const args = split(' ', commandLine)
       execa(head(args), tail(args), options)
@@ -55,14 +55,14 @@ module.exports = function (context) {
    * @param {options} options Additional child_process options for node.
    * @returns {Promise} The response code.
    */
-  async function spawn (commandLine, options) {
+  async function spawn(commandLine, options) {
     return new Promise((resolve, reject) => {
       const args = split(' ', commandLine)
       const spawned = crossSpawn(head(args), tail(args), options)
       let result = {
         stdout: null,
         status: null,
-        error: null
+        error: null,
       }
       if (spawned.stdout) {
         spawned.stdout.on('data', data => {
@@ -90,7 +90,7 @@ module.exports = function (context) {
    * @param {string} command The name of program you're looking for.
    * @return {string} The full path or null.
    */
-  function which (command) {
+  function which(command) {
     return nodeWhich.sync(command)
   }
 
@@ -99,7 +99,7 @@ module.exports = function (context) {
    *
    * @return {function} A function that when called will return the elapsed duration in milliseconds.
    */
-  function startTimer () {
+  function startTimer() {
     const started = process.uptime()
     return () => Math.floor((process.uptime() - started) * 1000) // uptime gives us seconds
   }

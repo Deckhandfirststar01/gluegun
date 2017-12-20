@@ -1,4 +1,4 @@
-const { pipe, map, sortBy, prop, propEq, reject, replace, unnest, equals } = require('ramda')
+import { pipe, map, sortBy, prop, propEq, reject, replace, unnest, equals } from 'ramda'
 
 /**
  * Is this a hidden command?
@@ -13,13 +13,10 @@ const isHidden = propEq('hidden', true)
  * @param {string[]} commandRoot   Optional, only show commands with this root
  * @return {[string, string]}
  */
-function commandInfo (context, plugins, commandRoot) {
-  return pipe(
-    reject(isHidden),
-    sortBy(prop('name')),
-    map(p => getListOfCommands(context, p, commandRoot)),
-    unnest
-  )(plugins || context.runtime.plugins)
+function commandInfo(context, plugins, commandRoot) {
+  return pipe(reject(isHidden), sortBy(prop('name')), map(p => getListOfCommands(context, p, commandRoot)), unnest)(
+    plugins || context.runtime.plugins,
+  )
 }
 
 /**
@@ -30,7 +27,7 @@ function commandInfo (context, plugins, commandRoot) {
  * @param {string[]} commandRoot   Optional, only show commands with this root
  * @return {[string, string]}
  */
-function getListOfCommands (context, plugin, commandRoot) {
+function getListOfCommands(context, plugin, commandRoot) {
   return pipe(
     reject(isHidden),
     reject(command => {
@@ -43,10 +40,10 @@ function getListOfCommands (context, plugin, commandRoot) {
       const alias = command.hasAlias() ? `(${command.aliases.join(', ')})` : ''
       return [
         `${command.commandPath.join(' ')} ${alias}`,
-        replace('$BRAND', context.runtime.brand, command.description || '-')
+        replace('$BRAND', context.runtime.brand, command.description || '-'),
       ]
-    })
+    }),
   )(plugin.commands)
 }
 
-module.exports = { commandInfo }
+export default { commandInfo }

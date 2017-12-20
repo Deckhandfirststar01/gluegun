@@ -1,5 +1,5 @@
-const test = require('ava')
-const Plugin = require('./plugin')
+import test from 'ava'
+import Plugin from './plugin'
 
 test('default state', t => {
   const plugin = new Plugin()

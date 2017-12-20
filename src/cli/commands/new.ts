@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   name: 'new',
   alias: ['n', 'create'],
   description: 'Creates a new gluegun cli',
@@ -10,7 +10,7 @@ module.exports = {
 
     const props = {
       name: parameters.first,
-      typescript: parameters.options.typescript
+      typescript: parameters.options.typescript,
     }
 
     if (!props.name || props.name.length === 0) {
@@ -33,8 +33,8 @@ module.exports = {
       generate({
         template: `cli/bin/cli-executable.ejs`,
         target: `./${props.name}/bin/${props.name}`,
-        props: props
-      })
+        props: props,
+      }),
     )
 
     const files = [
@@ -49,7 +49,7 @@ module.exports = {
       '.prettierrc.ejs',
       'package.json.ejs',
       'readme.md.ejs',
-      '.gitignore.ejs'
+      '.gitignore.ejs',
     ]
 
     if (props.typescript) {
@@ -61,9 +61,7 @@ module.exports = {
 
       const target =
         `${props.name}/` +
-        (props.typescript && file.includes('.js.ejs')
-          ? file.replace('.js.ejs', '.ts')
-          : file.replace('.ejs', ''))
+        (props.typescript && file.includes('.js.ejs') ? file.replace('.js.ejs', '.ts') : file.replace('.ejs', ''))
 
       const gen = generate({ template, target, props })
       return prev.concat([gen])
@@ -85,7 +83,7 @@ module.exports = {
     await system.spawn(`cd ${props.name} && npm i && npm run format`, {
       shell: true,
       stdio: 'inherit',
-      stderr: 'inherit'
+      stderr: 'inherit',
     })
 
     print.info(`Generated ${props.name} CLI.`)
@@ -98,5 +96,5 @@ module.exports = {
 
     // for tests
     return `new ${context.parameters.first}`
-  }
+  },
 }

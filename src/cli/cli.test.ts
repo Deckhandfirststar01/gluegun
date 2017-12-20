@@ -1,7 +1,7 @@
-const test = require('ava')
-const cli = require('./cli')
-const sinon = require('sinon')
-const uniqueTempDir = require('unique-temp-dir')
+import test from 'ava'
+import cli from './cli'
+import sinon from 'sinon'
+import uniqueTempDir from 'unique-temp-dir'
 
 sinon.stub(console, 'log')
 

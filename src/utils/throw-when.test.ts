@@ -1,6 +1,6 @@
-const { T, F } = require('ramda')
-const test = require('ava')
-const throwWhen = require('./throw-when')
+import { T, F } from 'ramda'
+import test from 'ava'
+import throwWhen from './throw-when'
 
 test('it throws', t => {
   t.throws(() => throwWhen('lulz', T, 1))

@@ -1,4 +1,4 @@
-const { curry, when } = require('ramda')
+import { curry, when } from 'ramda'
 
 /**
  * Throws an error if the predicate fails when applying value.
@@ -8,14 +8,14 @@ const { curry, when } = require('ramda')
  * @param {Function} predicate - The function to invoke
  * @param {*} value - The value to apply to the predicate
  */
-function throwWhen (message, predicate, value) {
+function throwWhen(message, predicate, value) {
   when(
     predicate,
     () => {
       throw new Error(message)
     },
-    value
+    value,
   )
 }
 
-module.exports = curry(throwWhen)
+export default curry(throwWhen)

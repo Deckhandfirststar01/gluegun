@@ -1,5 +1,5 @@
 // check the node version
-const semver = require('semver')
+import semver from 'semver'
 
 const nodeMinimum = '7.6.0'
 const nodeVersion = process.version.replace('v', '')
@@ -15,7 +15,7 @@ try {
 
 ok = hasAsyncAwait && isNewEnough
 
-module.exports = {
+export default {
   nodeMinimum,
   nodeVersion,
   isNewEnough,

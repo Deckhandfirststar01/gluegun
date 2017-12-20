@@ -1,26 +1,37 @@
+import RunContext from './run-context'
+
 /**
  * A command is user-callable function that runs stuff.
  */
 class Command {
-  constructor () {
+  name?: string
+  description?: string
+  file?: string
+  run?: (context: RunContext) => any
+  hidden: boolean
+  commandPath?: string[]
+  alias: string[]
+  dashed: boolean
+
+  constructor() {
     this.name = null
     this.description = null
     this.file = null
     this.run = null
     this.hidden = false
     this.commandPath = null
-    this.alias = null
+    this.alias = []
     this.dashed = false
   }
 
-  get aliases () {
+  get aliases(): string[] {
     if (!this.alias) {
       return []
     }
     return Array.isArray(this.alias) ? this.alias : [this.alias]
   }
 
-  hasAlias () {
+  hasAlias() {
     return this.aliases.length > 0
   }
 
@@ -30,10 +41,10 @@ class Command {
    *
    * @param {string|string[]} alias
    */
-  matchesAlias (alias) {
+  matchesAlias(alias) {
     const aliases = Array.isArray(alias) ? alias : [alias]
     return aliases.find(a => this.name === a || this.aliases.includes(a))
   }
 }
 
-module.exports = Command
+export default Command

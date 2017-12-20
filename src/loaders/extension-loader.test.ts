@@ -1,5 +1,5 @@
-const test = require('ava')
-const { loadExtensionFromFile } = require('./extension-loader')
+import test from 'ava'
+import { loadExtensionFromFile } from './extension-loader'
 
 test('loading from a missing file', async t => {
   const error = await t.throws(() => loadExtensionFromFile('foo.js', 'extension'), Error)
@@ -20,10 +20,7 @@ test('open a wierd js file', async t => {
 test('default but none exported', async t => {
   const file = `${__dirname}/../fixtures/good-modules/module-exports-object.js`
   const error = await t.throws(() => loadExtensionFromFile(file, 'extension'), Error)
-  t.is(
-    error.message,
-    `Error: couldn't load module-exports-object. Expected a function, got [object Object].`
-  )
+  t.is(error.message, `Error: couldn't load module-exports-object. Expected a function, got [object Object].`)
 })
 
 test('has front matter', async t => {

@@ -1,5 +1,5 @@
-const test = require('ava')
-const { commandInfo } = require('./command-info')
+import test from 'ava'
+import { commandInfo } from './command-info'
 
 test('commandInfo', t => {
   const fakeContext = {
@@ -12,12 +12,12 @@ test('commandInfo', t => {
               description: 'foo is a command',
               commandPath: ['foo'],
               aliases: ['f'],
-              hasAlias: () => true
-            }
-          ]
-        }
-      ]
-    }
+              hasAlias: () => true,
+            },
+          ],
+        },
+      ],
+    },
   }
 
   const info = commandInfo(fakeContext)

@@ -1,5 +1,5 @@
-const test = require('ava')
-const exported = require('./index')
+import test from 'ava'
+import exported from './index'
 
 test('create', t => {
   t.truthy(exported)
@@ -49,7 +49,7 @@ test('generate', async t => {
   t.truthy(exported.template)
   const actual = await exported.template.generate({
     template: './src/fixtures/good-plugins/generate/templates/simple.ejs',
-    directory: process.cwd()
+    directory: process.cwd(),
   })
   t.is(actual, 'simple file\n')
 })

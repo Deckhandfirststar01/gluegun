@@ -9,7 +9,7 @@ const { isFile } = require('../utils/filesystem-utils')
  *
  * @param  {RunContext} context The running context.
  */
-function attach (context) {
+function attach(context) {
   const { plugin } = context
 
   /**
@@ -18,7 +18,7 @@ function attach (context) {
    * @param  {{}} opts Generation options.
    * @return {string}  The generated string.
    */
-  async function generate (opts = {}) {
+  async function generate(opts = {}) {
     // required
     const template = opts.template
 
@@ -30,7 +30,7 @@ function attach (context) {
     const data = {
       config: context && context.config,
       parameters: context && context.parameters,
-      props: props
+      props: props,
     }
 
     // add our string utils to the filters available.
@@ -70,4 +70,4 @@ function attach (context) {
   context.template = { generate }
 }
 
-module.exports = attach
+export default attach

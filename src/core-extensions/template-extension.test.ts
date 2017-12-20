@@ -1,6 +1,6 @@
-const test = require('ava')
-const Runtime = require('../domain/runtime')
-const { startsWith } = require('ramdasauce')
+import test from 'ava'
+import Runtime from '../runtime/runtime'
+import { startsWith } from 'ramdasauce'
 
 const createRuntime = () => {
   const r = new Runtime()
@@ -16,7 +16,7 @@ test('generates a simple file', async t => {
 
 test('supports props', async t => {
   const context = await createRuntime().run('generate props Greetings_and_salutations', {
-    stars: 5
+    stars: 5,
   })
 
   t.is(
@@ -26,7 +26,7 @@ red
 green
 blue
 *****
-`
+`,
   )
 })
 
@@ -44,6 +44,6 @@ test('supports directories', async t => {
   t.is(
     context.result,
     `location
-`
+`,
   )
 })

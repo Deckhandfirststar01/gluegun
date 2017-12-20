@@ -1,6 +1,6 @@
-const test = require('ava')
-const createExtension = require('./http-extension')
-const http = require('http')
+import test from 'ava'
+import createExtension from './http-extension'
+import http from 'http'
 
 const context = {}
 createExtension(context)
@@ -41,7 +41,7 @@ test('connects to a server', async t => {
   server.listen()
   const port = server.address().port
   const api = ext.create({
-    baseURL: `http://127.0.0.1:${port}`
+    baseURL: `http://127.0.0.1:${port}`,
   })
   const response = await api.get('/')
   t.is(response.data, 'hi')

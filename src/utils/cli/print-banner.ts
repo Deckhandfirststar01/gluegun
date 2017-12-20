@@ -1,7 +1,7 @@
-const print = require('../utils/print')
-const colors = require('colors')
-const jetpack = require('fs-jetpack')
-const { split } = require('ramda')
+import print from '../utils/print'
+import colors from 'colors'
+import jetpack from 'fs-jetpack'
+import { split } from 'ramda'
 
 // grab ze files
 const BANNER = split('\n', jetpack.read(`${__dirname}/banner.txt`))
@@ -10,7 +10,7 @@ const pkg = jetpack.read(`${__dirname}/../../package.json`, 'json')
 /**
  * Prints the bruce banner.
  */
-function printBanner () {
+function printBanner() {
   print.newline()
   print.fancy(colors.random(BANNER[0]))
   print.fancy(colors.random(BANNER[1]))
@@ -28,4 +28,4 @@ function printBanner () {
   print.divider()
 }
 
-module.exports = printBanner
+export default printBanner

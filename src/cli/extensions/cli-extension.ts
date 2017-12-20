@@ -1,7 +1,7 @@
-const { resolve } = require('path')
-const { chmodSync } = require('fs')
+import { resolve } from 'path'
+import { chmodSync } from 'fs'
 
-module.exports = context => {
+export default context => {
   context.filesystem.resolve = resolve
   context.filesystem.chmodSync = chmodSync
 }

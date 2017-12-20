@@ -1,7 +1,8 @@
-const test = require('ava')
-const sinon = require('sinon')
-const command = require('./new')
-const strings = require('../../utils/string-utils')
+import test from 'ava'
+import sinon from 'sinon'
+import command from './new'
+import strings from '../../utils/string-utils'
+
 sinon.stub(console, 'log')
 
 const createContext = () => ({
@@ -10,17 +11,17 @@ const createContext = () => ({
     resolve: sinon.stub(),
     dir: sinon.stub(),
     chmodSync: sinon.stub(),
-    rename: sinon.stub()
+    rename: sinon.stub(),
   },
   system: {
-    spawn: sinon.stub()
+    spawn: sinon.stub(),
   },
   template: { generate: sinon.stub() },
   print: {
     info: sinon.stub(),
-    error: sinon.stub()
+    error: sinon.stub(),
   },
-  parameters: { first: null, options: {} }
+  parameters: { first: null, options: {} },
 })
 
 test('has the right interface', t => {
@@ -55,9 +56,7 @@ test('name must pass regex', async t => {
   context.parameters.first = name
   await command.run(context)
   const { error } = context.print
-  t.deepEqual(error.getCall(0).args, [
-    `${name} is not a valid name. Use lower-case and dashes only.`
-  ])
+  t.deepEqual(error.getCall(0).args, [`${name} is not a valid name. Use lower-case and dashes only.`])
   t.deepEqual(error.getCall(1).args, [`Suggested: gluegun new ${strings.kebabCase(name)}`])
 })
 
@@ -86,7 +85,7 @@ test('generates properly', async t => {
   t.deepEqual(generate.getCall(i++).args[0], {
     template: `cli/bin/cli-executable.ejs`,
     target: `./${name}/bin/${name}`,
-    props
+    props,
   })
 
   const DEFAULT_FILES = [
@@ -101,7 +100,7 @@ test('generates properly', async t => {
     ['.prettierrc.ejs', '.prettierrc'],
     ['package.json.ejs', 'package.json'],
     ['readme.md.ejs', 'readme.md'],
-    ['.gitignore.ejs', '.gitignore']
+    ['.gitignore.ejs', '.gitignore'],
   ]
 
   // test that each our files get generated
@@ -109,7 +108,7 @@ test('generates properly', async t => {
     t.deepEqual(generate.getCall(i++).args[0], {
       template: `cli/${file[0]}`,
       target: `${name}/${file[1]}`,
-      props
+      props,
     })
   })
 
@@ -119,7 +118,7 @@ test('generates properly', async t => {
   // test package installation
   t.deepEqual(spawn.firstCall.args, [
     `cd ${props.name} && npm i && npm run format`,
-    { shell: true, stdio: 'inherit', stderr: 'inherit' }
+    { shell: true, stdio: 'inherit', stderr: 'inherit' },
   ])
 
   t.is(result, `new ${name}`)
@@ -151,7 +150,7 @@ test('generates with typescript', async t => {
   t.deepEqual(generate.getCall(i++).args[0], {
     template: `cli/bin/cli-executable.ejs`,
     target: `./${name}/bin/${name}`,
-    props
+    props,
   })
 
   const DEFAULT_FILES = [
@@ -166,7 +165,7 @@ test('generates with typescript', async t => {
     ['.prettierrc.ejs', '.prettierrc'],
     ['package.json.ejs', 'package.json'],
     ['readme.md.ejs', 'readme.md'],
-    ['.gitignore.ejs', '.gitignore']
+    ['.gitignore.ejs', '.gitignore'],
   ]
 
   // test that each our files get generated
@@ -174,7 +173,7 @@ test('generates with typescript', async t => {
     t.deepEqual(generate.getCall(i++).args[0], {
       template: `cli/${file[0]}`,
       target: `${name}/${file[1]}`,
-      props
+      props,
     })
   })
 
@@ -184,7 +183,7 @@ test('generates with typescript', async t => {
   // test package installation
   t.deepEqual(spawn.firstCall.args, [
     `cd ${props.name} && npm i && npm run format`,
-    { shell: true, stdio: 'inherit', stderr: 'inherit' }
+    { shell: true, stdio: 'inherit', stderr: 'inherit' },
   ])
 
   t.is(result, `new ${name}`)

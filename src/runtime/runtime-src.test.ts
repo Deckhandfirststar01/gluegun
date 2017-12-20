@@ -1,10 +1,10 @@
-const test = require('ava')
-const Runtime = require('./runtime')
+import test from 'ava'
+import Runtime from './runtime'
 
 test('runs a command explicitly', async t => {
   const r = new Runtime()
   t.falsy(r.defaultPlugin)
-  r.src(`${__dirname}/../fixtures/good-plugins/threepack`)
+  r.addDefaultPlugin(`${__dirname}/../fixtures/good-plugins/threepack`)
   t.truthy(r.defaultPlugin)
   const context = await r.run('3pack three')
 
@@ -18,7 +18,7 @@ test('runs a command explicitly', async t => {
 test('runs a command via passed in args', async t => {
   const r = new Runtime()
   t.falsy(r.defaultPlugin)
-  r.src(`${__dirname}/../fixtures/good-plugins/threepack`)
+  r.addDefaultPlugin(`${__dirname}/../fixtures/good-plugins/threepack`)
   t.truthy(r.defaultPlugin)
   const context = await r.run('3pack three')
   t.truthy(context.plugin)

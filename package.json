@@ -95,10 +95,10 @@
     "parser": "babel-eslint"
   },
   "prettier": {
-    "printWidth": 100,
+    "printWidth": 120,
     "semi": false,
     "singleQuote": true,
-    "trailingComma": "es5"
+    "trailingComma": "all"
   },
   "lint-staged": {
     "*.ts": ["prettier --write", "tslint --fix", "git add"],

@@ -5,8 +5,8 @@ const stringUtils = require('../utils/string-utils')
  *
  * @param  {RunContext} context The running context.
  */
-function attach (context) {
+function attach(context) {
   context.strings = stringUtils
 }
 
-module.exports = attach
+export default attach

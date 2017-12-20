@@ -1,4 +1,4 @@
-const cosmiconfig = require('cosmiconfig')
+import cosmiconfig from 'cosmiconfig'
 
 /**
  * Loads the config for the app via CosmicConfig by searching in a few places.
@@ -6,10 +6,10 @@ const cosmiconfig = require('cosmiconfig')
  * @param {string} name The base name of the config to load.
  * @param {string} src The directory to look in.
  */
-function loadConfig (name, src) {
+function loadConfig(name, src) {
   const cosmicOpts = {
     sync: true, // load the config synchronously
-    rcExtensions: true // allow .namerc.yaml and .namerc.json as well
+    rcExtensions: true, // allow .namerc.yaml and .namerc.json as well
   }
 
   // attempt to load
@@ -20,4 +20,4 @@ function loadConfig (name, src) {
   return config
 }
 
-module.exports = { loadConfig }
+export default { loadConfig }

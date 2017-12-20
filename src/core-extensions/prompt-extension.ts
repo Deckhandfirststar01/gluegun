@@ -1,4 +1,4 @@
-import Enquirer from 'enquirer'
+import * as Enquirer from 'enquirer'
 
 /**
  * Provides user input prompts via enquirer.js.

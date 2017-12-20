@@ -1,4 +1,4 @@
-import colors from 'colors'
+import * as colors from 'colors'
 import ora from 'ora'
 import * as CLITable from 'cli-table2'
 

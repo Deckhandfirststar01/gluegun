@@ -1,7 +1,8 @@
-import { parseParams, createParams } from '../utils/cli/normalize-params'
+import { parseParams, createParams } from '../utils/normalize-params'
+import { isNil } from 'ramdasauce'
 import RunContext from '../domain/run-context'
 import Runtime from './runtime'
-import { isNil } from 'ramdasauce'
+import { findCommand } from './runtime-find-command'
 
 /**
  * Runs a command.
@@ -10,7 +11,7 @@ import { isNil } from 'ramdasauce'
  * @param  {{}} extraOptions Additional options use to execute a command.
  * @return {RunContext} The RunContext object indicating what happened.
  */
-async function run(this: Runtime, rawCommand: string | object, extraOptions = {}): Promise<RunContext> {
+export async function run(this: Runtime, rawCommand: string | object, extraOptions = {}): Promise<RunContext> {
   // use provided rawCommand or process arguments if none given
   rawCommand = rawCommand || process.argv
 
@@ -24,7 +25,7 @@ async function run(this: Runtime, rawCommand: string | object, extraOptions = {}
   context.parameters = parseParams(rawCommand, extraOptions)
 
   // find the plugin and command, and parse out aliases
-  const { plugin, command, array } = this.findCommand(context.parameters)
+  const { plugin, command, array } = findCommand(this, context.parameters)
 
   // jet if we have no plugin or command
   if (isNil(plugin) || isNil(command)) return context
@@ -63,5 +64,3 @@ async function run(this: Runtime, rawCommand: string | object, extraOptions = {}
 
   return context
 }
-
-export default run

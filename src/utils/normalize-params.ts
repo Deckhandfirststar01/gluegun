@@ -10,7 +10,7 @@ const COMMAND_DELIMITER = ' '
  * @param {Object} extraOpts
  * @returns {Object}
  */
-function parseParams(commandArray, extraOpts = {}) {
+export function parseParams(commandArray, extraOpts = {}) {
   // use the command line args if not passed in
   if (is(String, commandArray)) {
     commandArray = commandArray.split(COMMAND_DELIMITER)
@@ -35,7 +35,7 @@ function parseParams(commandArray, extraOpts = {}) {
  * @param {{}} params         Provided parameters
  * @return {{}}               An object with normalized parameters
  */
-function createParams(params) {
+export function createParams(params) {
   // make a copy of the args so we can mutate it
   const array = params.array.slice()
 
@@ -59,5 +59,3 @@ function createParams(params) {
     string,
   })
 }
-
-export default { parseParams, createParams }

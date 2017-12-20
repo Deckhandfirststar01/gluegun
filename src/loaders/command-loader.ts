@@ -1,7 +1,7 @@
 import { isNotFile } from '../utils/filesystem-utils'
 import { isBlank } from '../utils/string-utils'
 import loadModule from './module-loader'
-import jetpack from 'fs-jetpack'
+import * as jetpack from 'fs-jetpack'
 import { head, split, is, reject, isNil, takeLast, last } from 'ramda'
 import Command from '../domain/command'
 
@@ -11,7 +11,7 @@ import Command from '../domain/command'
  * @param  {string} file      The full path to the file to load.
  * @return {Command}          The command in any condition
  */
-function loadCommandFromFile(file, options = {}) {
+export function loadCommandFromFile(file, options = {}) {
   const command = new Command()
 
   // sanity check the input
@@ -58,7 +58,7 @@ function loadCommandFromFile(file, options = {}) {
   return command
 }
 
-function loadCommandFromPreload(preload) {
+export function loadCommandFromPreload(preload) {
   const command = new Command()
   command.name = preload.name
   command.description = preload.description
@@ -70,5 +70,3 @@ function loadCommandFromPreload(preload) {
   command.commandPath = preload.commandPath || [preload.name]
   return command
 }
-
-export default { loadCommandFromFile, loadCommandFromPreload }

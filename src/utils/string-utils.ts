@@ -1,20 +1,20 @@
 import { always, is, isEmpty, pipe, when } from 'ramda'
-import camelCase from 'lodash.camelcase'
-import kebabCase from 'lodash.kebabcase'
-import snakeCase from 'lodash.snakecase'
-import upperCase from 'lodash.uppercase'
-import lowerCase from 'lodash.lowercase'
-import startCase from 'lodash.startcase'
-import upperFirst from 'lodash.upperfirst'
-import lowerFirst from 'lodash.lowerfirst'
-import pad from 'lodash.pad'
-import padStart from 'lodash.padstart'
-import padEnd from 'lodash.padend'
-import trim from 'lodash.trim'
-import trimStart from 'lodash.trimstart'
-import trimEnd from 'lodash.trimend'
-import repeat from 'lodash.repeat'
-import pluralize from 'pluralize'
+import * as camelCase from 'lodash.camelcase'
+import * as kebabCase from 'lodash.kebabcase'
+import * as snakeCase from 'lodash.snakecase'
+import * as upperCase from 'lodash.uppercase'
+import * as lowerCase from 'lodash.lowercase'
+import * as startCase from 'lodash.startcase'
+import * as upperFirst from 'lodash.upperfirst'
+import * as lowerFirst from 'lodash.lowerfirst'
+import * as pad from 'lodash.pad'
+import * as padStart from 'lodash.padstart'
+import * as padEnd from 'lodash.padend'
+import * as trim from 'lodash.trim'
+import * as trimStart from 'lodash.trimstart'
+import * as trimEnd from 'lodash.trimend'
+import * as repeat from 'lodash.repeat'
+import * as pluralize from 'pluralize'
 
 const {
   plural,
@@ -28,25 +28,13 @@ const {
 } = pluralize
 
 /**
- * Is this not a string?
- *
- * @param  {any}     value The value to check
- * @return {boolean}       True if it is not a string, otherwise false
- */
-const isNotString = value => {
-  return !is(String, value)
-}
-
-/**
  * Is this value a blank string?
  *
  * @param   {any}     value The value to check.
  * @returns {boolean}       True if it was, otherwise false.
  */
-const isBlank = value => {
-  const check = pipe(when(isNotString, always('')), trim, isEmpty)
-
-  return check(value)
+const isBlank = (value: any) => {
+  return !is(String, value) || isEmpty(trim(value))
 }
 
 /**
@@ -69,7 +57,7 @@ function pascalCase(value) {
   return pipe(camelCase, upperFirst)(value)
 }
 
-export default {
+export {
   identity,
   isBlank,
   isNotString,

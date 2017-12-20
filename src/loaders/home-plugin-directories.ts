@@ -1,5 +1,5 @@
 import { map } from 'ramda'
-import jetpack from 'fs-jetpack'
+import * as jetpack from 'fs-jetpack'
 import { isDirectory } from '../utils/filesystem-utils'
 
 /**

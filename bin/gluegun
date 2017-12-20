@@ -4,4 +4,4 @@
 require('ts-node').register({ project: `${__dirname}/../tsconfig.json` })
 
 // kick off gluegun
-require(`${__dirname}/../src/cli/cli`)(process.argv)
+require(`${__dirname}/../src/cli/cli`).run(process.argv)

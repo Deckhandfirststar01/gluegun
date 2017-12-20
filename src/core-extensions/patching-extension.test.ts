@@ -1,5 +1,5 @@
 import test from 'ava'
-import jetpack from 'fs-jetpack'
+import * as jetpack from 'fs-jetpack'
 import tempWrite from 'temp-write'
 import create from './patching-extension'
 

@@ -1,7 +1,7 @@
 import { isNotFile } from '../utils/filesystem-utils'
 import { isBlank } from '../utils/string-utils'
 import loadModule from './module-loader'
-import jetpack from 'fs-jetpack'
+import * as jetpack from 'fs-jetpack'
 import { head, split } from 'ramda'
 import Extension from '../domain/extension'
 

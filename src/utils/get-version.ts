@@ -1,4 +1,4 @@
-import jetpack from 'fs-jetpack'
+import * as jetpack from 'fs-jetpack'
 import RunContext from '../domain/run-context'
 
 /**

@@ -1,4 +1,4 @@
-import jetpack from 'fs-jetpack'
+import * as jetpack from 'fs-jetpack'
 import { map, concat, complement } from 'ramda'
 import { isBlank } from './string-utils'
 
@@ -59,10 +59,4 @@ const subdirectories = (base, isRelative, matching = '*', symlinks = false) => {
   }
 }
 
-export default {
-  isFile,
-  isNotFile,
-  isDirectory,
-  isNotDirectory,
-  subdirectories,
-}
+export { isFile, isNotFile, isDirectory, isNotDirectory, subdirectories }

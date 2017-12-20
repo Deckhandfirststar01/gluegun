@@ -31,8 +31,8 @@ class Builder {
    * @param options Additional plugin loading options.
    * @return {Builder} self.
    */
-  src(value: string, options?: object = {}): Builder {
-    this.runtime.src(value, options)
+  src(value: string, options: object = {}): Builder {
+    this.runtime.addDefaultPlugin(value, options)
     return this
   }
 
@@ -44,7 +44,7 @@ class Builder {
    * @return {Builder}         self.
    */
   plugin(value: string, options: object = {}) {
-    this.runtime.plugin(value, options)
+    this.runtime.addPlugin(value, options)
     return this
   }
 
@@ -56,7 +56,7 @@ class Builder {
    * @return {Builder}         self.
    */
   plugins(value: string, options: object = {}) {
-    this.runtime.plugins(value, options)
+    this.runtime.addPlugin(value, options)
     return this
   }
 
@@ -106,7 +106,7 @@ class Builder {
    * @return {Builder}
    */
   command(command: object) {
-    this.runtime.command(command)
+    this.runtime.addCommand(command)
     return this
   }
 }

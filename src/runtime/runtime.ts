@@ -17,13 +17,12 @@ import { resolve } from 'path'
  */
 class Runtime {
   brand?: string
-  run?: (context: RunContext) => RunContext
   plugins?: Plugin[]
   extensions?: { name: string; setup: ((context: RunContext) => void) }[]
   defaults?: object
   defaultPlugin?: Plugin
   config?: object
-  run?: (rawCommand: string | object, extraOptions = {}) => any
+  run?: (rawCommand: string | object, extraOptions: object) => any
 
   /**
    * Create and initialize an empty Runtime.

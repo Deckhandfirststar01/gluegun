@@ -3,7 +3,7 @@ import { build } from '../index'
 /**
  * Create the cli and kick it off
  */
-async function run(argv) {
+export async function run(argv) {
   // create a CLI runtime
   const cli = build()
     .brand('gluegun')
@@ -18,5 +18,3 @@ async function run(argv) {
   // send it back (for testing, mostly)
   return context
 }
-
-export default run

@@ -1,7 +1,17 @@
-// TODODOOOOOOO
+import { isNilOrEmpty } from 'ramdasauce'
+import { find, isNil, equals, reduce, sort } from 'ramda'
 
-export default function findCommand(runtime, parameters) {
-  return find(plugin => {
+import Runtime from './runtime'
+import Command from '../domain/command'
+import Plugin from '../domain/plugin'
+
+export function findCommand(runtime: Runtime, parameters: any) {
+  let rest: string[]
+  let targetCommand: Command
+
+  const commandPath: string[] = parameters.array
+
+  const targetPlugin = find((plugin: Plugin) => {
     if (isNil(plugin) || isNilOrEmpty(plugin.commands)) return false
 
     // track the rest of the commandPath as we traverse
@@ -28,7 +38,7 @@ export default function findCommand(runtime, parameters) {
 
     if (finalCommandPath.length === 0) {
       // If we're not looking down a command path, look for dashed commands or a default command
-      const dashedOptions = Object.keys(options).filter(k => options[k] === true)
+      const dashedOptions = Object.keys(parameters.options).filter(k => parameters.options[k] === true)
 
       targetCommand = find(command => {
         // dashed commands, like --version or -v
@@ -42,5 +52,7 @@ export default function findCommand(runtime, parameters) {
 
     // Did we find the targetCommand?
     return Boolean(targetCommand)
-  }, plugins)
+  }, runtime.plugins)
+
+  return { plugin: targetPlugin, command: targetCommand, array: rest }
 }

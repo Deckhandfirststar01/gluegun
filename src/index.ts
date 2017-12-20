@@ -12,7 +12,7 @@
 // ----------------------------------------------------------------------------
 
 // first, do a sniff test to ensure our dependencies are met
-import sniff from '../sniff'
+const sniff = require('../sniff')
 
 // check the node version
 if (!sniff.isNewEnough) {
@@ -20,43 +20,51 @@ if (!sniff.isNewEnough) {
   process.exit(1)
 }
 
+// bring in a few extensions to make available for stand-alone purposes
+import attachFilesystemExtension from './core-extensions/filesystem-extension'
+import attachSemverExtension from './core-extensions/semver-extension'
+import attachSystemExtension from './core-extensions/system-extension'
+import attachPromptExtension from './core-extensions/prompt-extension'
+import attachHttpExtension from './core-extensions/http-extension'
+import attachTemplateExtension from './core-extensions/template-extension'
+import attachPatchingExtension from './core-extensions/patching-extension'
+
+// bring in some context
+import build from './domain/builder'
+import strings from './utils/string-utils'
+import print from './utils/print'
+import { printHelp, printCommands } from './utils/print-help'
+
+// we want to see real exceptions with backtraces and stuff
+process.removeAllListeners('unhandledRejection')
+process.on('unhandledRejection', up => {
+  throw up
+})
+
+require('app-module-path').addPath(`${__dirname}/../node_modules`)
+require('app-module-path').addPath(process.cwd())
+// ----------------------------------------------------------------------------
+
 // wrap all this in a function call to avoid global scoping
-function setupGluegun() {
-  // we want to see real exceptions with backtraces and stuff
-  process.removeAllListeners('unhandledRejection')
-  process.on('unhandledRejection', up => {
-    throw up
-  })
 
-  require('app-module-path').addPath(`${__dirname}/../node_modules`)
-  require('app-module-path').addPath(process.cwd())
-  // ----------------------------------------------------------------------------
-
-  // import a bunch of things we want to make available
-  const build = require('./domain/builder')
-  const strings = require('./utils/string-utils')
-  const print = require('./utils/print')
-  const { printHelp, printCommands } = require('./utils/print-help')
-
-  const context = {
-    build,
-    strings,
-    print,
-    printCommands,
-    printHelp,
-  }
-
-  // bring in a few extensions to make available for stand-alone purposes
-  require('./core-extensions/filesystem-extension')(context)
-  require('./core-extensions/semver-extension')(context)
-  require('./core-extensions/system-extension')(context)
-  require('./core-extensions/prompt-extension')(context)
-  require('./core-extensions/http-extension')(context)
-  require('./core-extensions/template-extension')(context)
-  require('./core-extensions/patching-extension')(context)
-
-  return context
+const context = {
+  build,
+  strings,
+  print,
+  printCommands,
+  printHelp,
 }
 
+attachFilesystemExtension(context)
+attachSemverExtension(context)
+attachSystemExtension(context)
+attachPromptExtension(context)
+attachHttpExtension(context)
+attachTemplateExtension(context)
+attachPatchingExtension(context)
+
+export { build, strings, print, printCommands, printHelp }
+
 // export our API
-export default setupGluegun()
+// export { build, strings, print, printCommands, printHelp }
+export default context

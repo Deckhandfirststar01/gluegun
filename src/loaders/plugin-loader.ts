@@ -1,4 +1,4 @@
-import jetpack from 'fs-jetpack'
+import * as jetpack from 'fs-jetpack'
 import Plugin from '../domain/plugin'
 import { loadConfig } from './config-loader'
 import { loadCommandFromFile, loadCommandFromPreload } from './command-loader'
@@ -13,7 +13,7 @@ import { assoc, map } from 'ramda'
  * @param {string} directory The full path to the directory to load.
  * @param {{}}     options   Additional options to customize the loading process.
  */
-function loadPluginFromDirectory(directory: string, options: any = {}) {
+export function loadPluginFromDirectory(directory: string, options: any = {}) {
   const plugin = new Plugin()
 
   const {
@@ -81,5 +81,3 @@ function loadPluginFromDirectory(directory: string, options: any = {}) {
 
   return plugin
 }
-
-export default { loadPluginFromDirectory }

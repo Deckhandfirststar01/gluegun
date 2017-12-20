@@ -1,6 +1,5 @@
-const Runtime = require('./runtime')
+const Runtime = require('../runtime/runtime')
 const { dissoc } = require('ramda')
-const { loadConfig } = require('../loaders/config-loader')
 
 /**
  * Provides a cleaner way to build a runtime.
@@ -9,52 +8,7 @@ const { loadConfig } = require('../loaders/config-loader')
  */
 class Builder {
   constructor () {
-    this.loadPlugins = [] // the plugins
-    this.preloadedCommands = [] // any preloaded commands to add to the default plugin
-    this.create = this.create.bind(this)
-    this.brand = this.brand.bind(this)
-    this.src = this.src.bind(this)
-    this.plugin = this.plugin.bind(this)
-    this.plugins = this.plugins.bind(this)
-  }
-
-  /**
-   * Makes the runtime.
-   *
-   * @return {Runtime} The runtime we're building
-   */
-  create () {
-    const runtime = new Runtime(this.brand)
-
-    const defaultPlugin = this.loadPlugins.find(p => p.type === 'default')
-
-    const config = defaultPlugin ? loadConfig(this.brand, defaultPlugin.value) : {}
-
-    // extract the defaults
-    runtime.defaults = config.defaults
-
-    // set config to be the file minutes defaults
-    runtime.config = dissoc('defaults', config)
-
-    // the plugins get loaded next
-    this.loadPlugins.forEach(entry => {
-      switch (entry.type) {
-        case 'default':
-          const defaultOptions = Object.assign({}, entry.options, {
-            preloadedCommands: this.preloadedCommands
-          })
-          runtime.loadDefault(entry.value, defaultOptions)
-          break
-        case 'load':
-          runtime.load(entry.value, entry.options)
-          break
-        case 'loadAll':
-          runtime.loadAll(entry.value, entry.options)
-          break
-      }
-    })
-
-    return runtime
+    this.runtime = new Runtime()
   }
 
   /**
@@ -64,7 +18,7 @@ class Builder {
    * @return {Builder} self.
    */
   brand (value) {
-    this.brand = value
+    this.runtime.brand = value
     return this
   }
 
@@ -76,8 +30,7 @@ class Builder {
    * @return {Builder}         self.
    */
   src (value, options = {}) {
-    options.name = options.name || this.brand
-    this.loadPlugins.push({ type: 'default', value, options })
+    this.runtime.src(value, options)
     return this
   }
 
@@ -89,7 +42,7 @@ class Builder {
    * @return {Builder}         self.
    */
   plugin (value, options = {}) {
-    this.loadPlugins.push({ type: 'load', value, options })
+    this.runtime.plugin(value, options)
     return this
   }
 
@@ -101,7 +54,7 @@ class Builder {
    * @return {Builder}         self.
    */
   plugins (value, options = {}) {
-    this.loadPlugins.push({ type: 'loadAll', value, options })
+    this.runtime.plugins(value, entry)
     return this
   }
 
@@ -151,7 +104,7 @@ class Builder {
    * @return {Builder}
    */
   command (command) {
-    this.preloadedCommands.push(command)
+    this.runtime.command(command)
     return this
   }
 }

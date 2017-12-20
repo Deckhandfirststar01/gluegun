@@ -1,10 +1,28 @@
 const yargsParse = require('yargs-parser')
-
 const { merge } = require('ramda')
 
-function parseParams (argv, extraOpts = {}) {
+const COMMAND_DELIMITER = ' '
+
+/**
+ * Parses given command arguments into a more useful format.
+ *
+ * @param {string|string[]} commandArray
+ * @param {Object} extraOpts
+ * @returns {Object}
+ */
+function parseParams (commandArray, extraOpts = {}) {
+  // use the command line args if not passed in
+  if (is(String, commandArray)) {
+    commandArray = commandArray.split(COMMAND_DELIMITER)
+  }
+
+  // remove the first 2 args if it comes from process.argv
+  if (equals(commandArray, process.argv)) {
+    commandArray = commandArray.slice(2)
+  }
+
   // chop it up yargsParse!
-  const parsed = yargsParse(argv)
+  const parsed = yargsParse(commandArray)
   const array = parsed._.slice()
   delete parsed._
   const options = merge(parsed, extraOpts)

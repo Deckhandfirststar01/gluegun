@@ -877,16 +877,6 @@ export interface GluegunRuntime {
    */
   addExtension(name: string, attach: GluegunExtensionAttacher)
 
-  /** A list of registered commands. */
-  listCommands(): Array<{ plugin: GluegunPlugin; command: GluegunCommand }>
-
-  /**
-   * Finds a plugin by name.
-   *
-   * @param name The name of the plugin.
-   */
-  findPlugin(name: string): GluegunPlugin | void
-
   /**
    * Finds a command by plugin name and raw command.
    *

@@ -1,11 +1,12 @@
 import test from 'ava'
 import * as jetpack from 'fs-jetpack'
 import tempWrite from 'temp-write'
-import create from './patching-extension'
+import RunContext from '../domain/run-context'
+const create = require('./patching-extension')
 
 // const { startsWith } = require('ramdasauce')
 
-const context = {}
+const context = new RunContext()
 create(context)
 const patching = context.patching
 

@@ -22,7 +22,7 @@ class Runtime {
   defaults?: object
   defaultPlugin?: Plugin
   config?: object
-  run?: (rawCommand: string | object, extraOptions: object) => any
+  run?: (rawCommand: string | object, extraOptions?: object) => any
 
   /**
    * Create and initialize an empty Runtime.

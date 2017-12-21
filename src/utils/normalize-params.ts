@@ -1,5 +1,6 @@
 import * as yargsParse from 'yargs-parser'
 import { merge, is, equals } from 'ramda'
+import { RunContextParameters } from '../domain/run-context'
 
 const COMMAND_DELIMITER = ' '
 
@@ -8,9 +9,9 @@ const COMMAND_DELIMITER = ' '
  *
  * @param {string|string[]} commandArray
  * @param {Object} extraOpts
- * @returns {Object}
+ * @returns {RunContextParameters}
  */
-export function parseParams(commandArray, extraOpts = {}) {
+export function parseParams(commandArray, extraOpts = {}): RunContextParameters {
   // use the command line args if not passed in
   if (is(String, commandArray)) {
     commandArray = commandArray.split(COMMAND_DELIMITER)

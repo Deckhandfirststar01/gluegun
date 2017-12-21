@@ -1,8 +1,9 @@
 import test from 'ava'
-import createExtension from './http-extension'
-import http from 'http'
+const createExtension = require('./http-extension')
+import * as http from 'http'
+import RunContext from '../domain/run-context'
 
-const context = {}
+const context = new RunContext()
 createExtension(context)
 const ext = context.http
 

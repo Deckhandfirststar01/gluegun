@@ -43,7 +43,12 @@ const isNotDirectory = complement(isDirectory)
  * @param  {boolean} symlinks  If true, will include any symlinks along the way.
  * @return {string[]}          A list of directories
  */
-const subdirectories = (base, isRelative, matching = '*', symlinks = false) => {
+const subdirectories = (
+  base: string,
+  isRelative: boolean = false,
+  matching: string = '*',
+  symlinks: boolean = false,
+) => {
   if (isBlank(base) || !isDirectory(base)) return []
   const dirs = jetpack.cwd(base).find({
     matching,

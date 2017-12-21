@@ -4,6 +4,7 @@ import execa from 'execa'
 import nodeWhich from 'which'
 import crossSpawn from 'cross-spawn'
 import RunContext from '../domain/run-context'
+import Options from '../domain/options'
 
 /**
  * Extensions to launch processes and open files.
@@ -18,7 +19,7 @@ function attach(context: RunContext) {
    * @param {options} options Additional child_process options for node.
    * @returns {Promise}
    */
-  async function run(commandLine, options = {}) {
+  async function run(commandLine, options: Options = {}) {
     const trimmer = options && options.trim ? trim : identity
     const nodeOptions = dissoc('trim', options)
 

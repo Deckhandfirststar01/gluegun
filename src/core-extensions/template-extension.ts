@@ -3,6 +3,7 @@ import jetpack from 'fs-jetpack'
 import { replace, forEach, keys } from 'ramda'
 import * as stringUtils from '../utils/string-utils'
 import { isFile } from '../utils/filesystem-utils'
+import Options from '../domain/options'
 
 /**
  * Builds the code generation feature.
@@ -18,7 +19,7 @@ function attach(context) {
    * @param  {{}} opts Generation options.
    * @return {string}  The generated string.
    */
-  async function generate(opts = {}) {
+  async function generate(opts: Options = {}) {
     // required
     const template = opts.template
 

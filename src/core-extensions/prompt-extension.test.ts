@@ -1,8 +1,9 @@
 import test from 'ava'
-import createExtension from './prompt-extension'
+import RunContext from '../domain/run-context'
+const createExtension = require('./prompt-extension')
 
 test('has the proper interface', t => {
-  const context = {}
+  const context = new RunContext()
   createExtension(context)
   const ext = context.prompt
   t.truthy(ext)

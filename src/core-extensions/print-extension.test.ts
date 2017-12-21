@@ -1,5 +1,5 @@
 import test from 'ava'
-import printExtension from './print-extension'
+const printExtension = require('./print-extension')
 
 let context: any = {}
 printExtension(context)

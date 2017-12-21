@@ -30,7 +30,7 @@ const attachTemplateExtension = require('./core-extensions/template-extension')
 const attachPatchingExtension = require('./core-extensions/patching-extension')
 
 // bring in some context
-import { build } from './domain/builder'
+import { build, Builder } from './domain/builder'
 import * as strings from './utils/string-utils'
 import * as print from './utils/print'
 import { printHelp, printCommands } from './utils/print-help'
@@ -47,7 +47,7 @@ require('app-module-path').addPath(process.cwd())
 
 // wrap all this in a function call to avoid global scoping
 
-const context: any = {
+const context: { build: () => Builder; [key: string]: any } = {
   build,
   strings,
   print,

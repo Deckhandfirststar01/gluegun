@@ -4,7 +4,7 @@ import { startsWith } from 'ramdasauce'
 
 const createRuntime = () => {
   const r = new Runtime()
-  r.load(`${__dirname}/../fixtures/good-plugins/generate`)
+  r.addPlugin(`${__dirname}/../fixtures/good-plugins/generate`)
   return r
 }
 

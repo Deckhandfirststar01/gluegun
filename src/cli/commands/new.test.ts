@@ -1,29 +1,32 @@
 import test from 'ava'
 import * as sinon from 'sinon'
 import * as strings from '../../utils/string-utils'
+import RunContext from '../../domain/run-context'
 
 const command = require('./new')
 
 sinon.stub(console, 'log')
 
-const createContext = () => ({
-  strings,
-  filesystem: {
+function createContext(): RunContext {
+  const fakeContext = new RunContext()
+  fakeContext.strings = strings
+  fakeContext.filesystem = {
     resolve: sinon.stub(),
     dir: sinon.stub(),
     chmodSync: sinon.stub(),
     rename: sinon.stub(),
-  },
-  system: {
+  }
+  fakeContext.system = {
     spawn: sinon.stub(),
-  },
-  template: { generate: sinon.stub() },
-  print: {
+  }
+  fakeContext.template = { generate: sinon.stub() }
+  fakeContext.print = {
     info: sinon.stub(),
     error: sinon.stub(),
-  },
-  parameters: { first: null, options: {} },
-})
+  }
+  fakeContext.parameters = { first: null, options: {} }
+  return fakeContext
+}
 
 test('has the right interface', t => {
   t.is(command.name, 'new')

@@ -1,8 +1,20 @@
 import Plugin from './plugin'
 import Command from './command'
 import Runtime from '../runtime/runtime'
+import Options from './options'
 
-class RunContext {
+export interface RunContextParameters {
+  array?: string[]
+  options?: Options
+  first?: string
+  second?: string
+  third?: string
+  string?: string
+  raw?: any
+  argv?: any
+}
+
+export default class RunContext {
   // our catch-all! since we can add whatever to this object
   [key: string]: any
 
@@ -10,7 +22,7 @@ class RunContext {
   result?: any
   error?: any
   config: object
-  parameters: object
+  parameters?: RunContextParameters
   plugin?: Plugin
   command?: Command
   pluginName?: string
@@ -39,5 +51,3 @@ class RunContext {
     this.parameters = {}
   }
 }
-
-export default RunContext

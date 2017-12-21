@@ -1,5 +1,5 @@
 import test from 'ava'
-import build from './builder'
+import { build } from './builder'
 
 test('the gauntlet', t => {
   const brand = 'test'

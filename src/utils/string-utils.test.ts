@@ -1,5 +1,5 @@
 import test from 'ava'
-import stringUtils from './string-utils'
+import * as stringUtils from './string-utils'
 const {
   identity,
   isBlank,
@@ -42,18 +42,6 @@ test('isBlank', t => {
   t.true(isBlank({}))
   t.true(isBlank([]))
   t.false(isBlank('s'))
-})
-
-test('isNotString', t => {
-  t.true(isNotString())
-  t.true(isNotString(1))
-  t.true(isNotString(true))
-  t.true(isNotString(false))
-  t.true(isNotString(null))
-  t.true(isNotString({}))
-  t.true(isNotString([]))
-  t.false(isNotString(''))
-  t.false(isNotString('s'))
 })
 
 test('isNotString', t => {

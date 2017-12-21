@@ -1,4 +1,4 @@
-import print from '../utils/print'
+import * as print from '../utils/print'
 import { printHelp, printCommands } from '../utils/print-help'
 
 /**

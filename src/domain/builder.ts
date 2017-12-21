@@ -64,7 +64,7 @@ export class Builder {
    * @param  {any} command An optional command function or object
    * @return {Builder}         self.
    */
-  help(command: any) {
+  help(command?: any) {
     command = command || require(`../core-commands/help`)
     if (typeof command === 'function') {
       command = { name: 'help', alias: ['h'], dashed: true, run: command }
@@ -77,7 +77,7 @@ export class Builder {
    * @param  {any} command An optional command function or object
    * @return {Builder}         self.
    */
-  version(command: any) {
+  version(command?: any) {
     command = command || require(`../core-commands/version`)
     if (typeof command === 'function') {
       command = { name: 'version', alias: ['v'], dashed: true, run: command }
@@ -90,7 +90,7 @@ export class Builder {
    * @param  {any} command An optional command function or object
    * @return {Builder}         self.
    */
-  defaultCommand(command: any) {
+  defaultCommand(command?: any) {
     command = command || require(`../core-commands/default`)
     if (typeof command === 'function') {
       command = { run: command }

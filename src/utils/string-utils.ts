@@ -28,13 +28,23 @@ const {
 } = pluralize
 
 /**
+ * Is this not a string?
+ *
+ * @param  {any}     value The value to check
+ * @return {boolean}       True if it is not a string, otherwise false
+ */
+const isNotString = value => {
+  return !is(String, value)
+}
+
+/**
  * Is this value a blank string?
  *
  * @param   {any}     value The value to check.
  * @returns {boolean}       True if it was, otherwise false.
  */
 const isBlank = (value: any) => {
-  return !is(String, value) || isEmpty(trim(value))
+  return isNotString(value) || isEmpty(trim(value))
 }
 
 /**
@@ -60,6 +70,7 @@ function pascalCase(value) {
 export {
   identity,
   isBlank,
+  isNotString,
   camelCase,
   kebabCase,
   snakeCase,

@@ -45,7 +45,7 @@ test('http', t => {
   t.is(typeof api.post, 'function')
 })
 
-test.only('generate', async t => {
+test('generate', async t => {
   t.truthy(exported.template)
   const actual = await exported.template.generate({
     template: './src/fixtures/good-plugins/generate/templates/simple.ejs',

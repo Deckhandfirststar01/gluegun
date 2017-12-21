@@ -59,7 +59,7 @@ function attach(context) {
     if (!stringUtils.isBlank(target)) {
       // prep the destination directory
       const dir = replace(/$(\/)*/g, '', target)
-      const dest = `${jetpack.cwd()}/${dir}`
+      const dest = jetpack.path(dir)
 
       jetpack.write(dest, content)
     }

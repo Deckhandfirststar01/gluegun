@@ -7,4 +7,3 @@ yarn.lock
 coverage
 .nyc_output
 generated
-build

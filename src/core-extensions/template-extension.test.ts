@@ -8,7 +8,7 @@ const createRuntime = () => {
   return r
 }
 
-test('generates a simple file', async t => {
+test.only('generates a simple file', async t => {
   const context = await createRuntime().run('generate simple')
 
   t.is(context.result, 'simple file\n')

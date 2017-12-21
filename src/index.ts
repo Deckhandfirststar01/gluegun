@@ -62,5 +62,28 @@ attachHttpExtension(context)
 attachTemplateExtension(context)
 attachPatchingExtension(context)
 
-export { build, strings, print, printCommands, printHelp }
-export default context
+const filesystem = context.filesystem
+const semver = context.semver
+const system = context.system
+const prompt = context.prompt
+const http = context.http
+const template = context.template
+const patching = context.patching
+
+import { GluegunRunContext } from './domain/run-context'
+
+export {
+  GluegunRunContext,
+  build,
+  strings,
+  print,
+  printCommands,
+  printHelp,
+  filesystem,
+  semver,
+  system,
+  prompt,
+  http,
+  template,
+  patching,
+}

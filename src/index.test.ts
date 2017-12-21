@@ -1,5 +1,5 @@
 import test from 'ava'
-import exported from './index'
+import * as exported from './index'
 
 test('create', t => {
   t.truthy(exported)

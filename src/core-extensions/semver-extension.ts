@@ -1,4 +1,4 @@
-import semver from 'semver'
+import * as semver from 'semver'
 
 /**
  * Extensions to access semver and helpers
@@ -6,10 +6,7 @@ import semver from 'semver'
  * @param  {RunContext} context The running context.
  */
 function attach(context) {
-  const extension = semver // semver
-  // Add bells and whistles here
-
-  context.semver = extension
+  context.semver = semver
 }
 
 module.exports = attach

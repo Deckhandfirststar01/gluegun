@@ -5,7 +5,7 @@ import { loadCommandFromFile, loadCommandFromPreload } from './command-loader'
 import { loadExtensionFromFile } from './extension-loader'
 import { isNotDirectory } from '../utils/filesystem-utils'
 import { isBlank } from '../utils/string-utils'
-import { assoc, map } from 'ramda'
+import { map } from 'ramda'
 
 /**
  * Loads a plugin from a directory.
@@ -76,7 +76,7 @@ export function loadPluginFromDirectory(directory: string, options: any = {}) {
 
   // set the hidden bit
   if (hidden) {
-    plugin.commands = map(assoc('hidden', true), plugin.commands)
+    plugin.commands.forEach(command => (command.hidden = true))
   }
 
   return plugin

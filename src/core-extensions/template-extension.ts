@@ -1,5 +1,5 @@
-import ejs from 'ejs'
-import jetpack from 'fs-jetpack'
+import * as ejs from 'ejs'
+import * as jetpack from 'fs-jetpack'
 import { replace, forEach, keys } from 'ramda'
 import * as stringUtils from '../utils/string-utils'
 import { isFile } from '../utils/filesystem-utils'

@@ -1,5 +1,6 @@
 import test from 'ava'
 import { loadCommandFromFile, loadCommandFromPreload } from './command-loader'
+import RunContext from '../domain/run-context'
 
 test('loading from a missing file', async t => {
   const error = await t.throws(() => loadCommandFromFile('foo.js'), Error)
@@ -7,8 +8,8 @@ test('loading from a missing file', async t => {
 })
 
 test('deals with weird input', async t => {
-  const error = await t.throws(() => loadCommandFromFile(), Error)
-  t.is(error.message, "Error: couldn't load command (file is blank): undefined")
+  const error = await t.throws(() => loadCommandFromFile(''), Error)
+  t.is(error.message, "Error: couldn't load command (file is blank): ")
 })
 
 test('open a weird js file', async t => {
@@ -41,7 +42,7 @@ test('load command from preload', async t => {
   t.is(command.description, 'yiss dream')
   t.is(command.hidden, false)
   t.deepEqual(command.alias, ['z'])
-  t.is(command.run(), 'ran!')
+  t.is(command.run(new RunContext()), 'ran!')
   t.is(command.file, null)
   t.is(command.dashed, true)
   t.deepEqual(command.commandPath, ['hello'])

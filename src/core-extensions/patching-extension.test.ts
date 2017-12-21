@@ -1,8 +1,8 @@
 import test from 'ava'
 import * as jetpack from 'fs-jetpack'
-import tempWrite from 'temp-write'
 import RunContext from '../domain/run-context'
 const create = require('./patching-extension')
+const tempWrite = require('temp-write')
 
 // const { startsWith } = require('ramdasauce')
 

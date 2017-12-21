@@ -1,9 +1,10 @@
 import test from 'ava'
 import { loadPluginFromDirectory } from './plugin-loader'
 import { find, propEq } from 'ramda'
+import RunContext from '../domain/run-context'
 
 test('deals with weird input', t => {
-  t.throws(() => loadPluginFromDirectory())
+  t.throws(() => loadPluginFromDirectory(''))
   t.throws(() => loadPluginFromDirectory(`${__dirname}/gonebabygone`))
 })
 
@@ -63,7 +64,7 @@ test('load commands with front matter', async t => {
 })
 
 test('loads extensions with front matter', async t => {
-  const context = {}
+  const context = new RunContext()
 
   const dir = `${__dirname}/../fixtures/good-plugins/front-matter`
   const plugin = loadPluginFromDirectory(dir)

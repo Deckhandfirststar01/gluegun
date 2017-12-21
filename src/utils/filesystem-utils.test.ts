@@ -29,7 +29,6 @@ test('subdirectories', t => {
 })
 
 test('blank subdirectories', t => {
-  t.deepEqual(subdirectories(), [])
   t.deepEqual(subdirectories(''), [])
   t.deepEqual(subdirectories(__filename), [])
 })

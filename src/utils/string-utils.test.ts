@@ -32,7 +32,6 @@ const {
 } = stringUtils
 
 test('isBlank', t => {
-  t.true(isBlank())
   t.true(isBlank(1))
   t.true(isBlank(true))
   t.true(isBlank(false))

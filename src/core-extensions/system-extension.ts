@@ -1,8 +1,8 @@
 import { exec as nodeExec } from 'child_process'
 import { isNil, split, head, tail, dissoc, trim, identity } from 'ramda'
-import execa from 'execa'
-import nodeWhich from 'which'
-import crossSpawn from 'cross-spawn'
+const execa = require('execa')
+const nodeWhich = require('which')
+const crossSpawn = require('cross-spawn')
 import RunContext from '../domain/run-context'
 import Options from '../domain/options'
 

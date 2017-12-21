@@ -16,7 +16,7 @@ const isHidden = propEq('hidden', true)
  * @param {string[]} commandRoot   Optional, only show commands with this root
  * @return {[string, string]}
  */
-export function commandInfo(context: RunContext, plugins?: Plugin[], commandRoot?: string[]) {
+export function commandInfo(context: RunContext, plugins?: Plugin[], commandRoot?: string[]): any {
   return pipe(reject(isHidden), sortBy(prop('name')), map(p => getListOfCommands(context, p, commandRoot)), unnest)(
     plugins || context.runtime.plugins,
   )

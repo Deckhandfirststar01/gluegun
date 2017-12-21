@@ -9,7 +9,7 @@ test('cannot find a command', async t => {
 
 test('is fatally wounded by exceptions', async t => {
   const r = new Runtime()
-  r.load(`${__dirname}/../fixtures/good-plugins/throws`)
+  r.addPlugin(`${__dirname}/../fixtures/good-plugins/throws`)
 
   // for some reason, t.throws doesn't work on this one ...
   try {

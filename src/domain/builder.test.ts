@@ -1,5 +1,6 @@
 import test from 'ava'
 import { build } from './builder'
+import RunContext from './run-context'
 
 test('the gauntlet', t => {
   const brand = 'test'
@@ -17,15 +18,22 @@ test('the gauntlet', t => {
     .plugin(`${__dirname}/../fixtures/good-plugins/simplest`)
     .plugins(`${__dirname}/../fixtures/good-plugins`, { hidden: true })
 
-  // the the builder
-  t.is(builder.brand, 'test')
+  // test the builder
+  t.is(builder.runtime.brand, 'test')
 
   const runtime = builder.create()
   t.truthy(runtime)
 
+  // console.dir(runtime.defaultPlugin.commands, { colors: true, levels: 2 })
+
+  // t.is({}, runtime.defaultPlugin.commands[2])
+
   t.is(runtime.defaultPlugin.commands.length, 6)
-  t.is(runtime.defaultPlugin.commands[0].name, 'help')
+  t.is(runtime.defaultPlugin.commands[0].name, brand)
   t.is(runtime.defaultPlugin.commands[1].name, 'gimmedatversion')
-  t.is(runtime.defaultPlugin.commands[1].run(), 'it works')
-  t.is(runtime.defaultPlugin.commands[2].name, brand)
+  t.is(runtime.defaultPlugin.commands[1].run(new RunContext()), 'it works')
+  t.is(runtime.defaultPlugin.commands[2].name, 'help')
+  t.is(runtime.defaultPlugin.commands[3].name, 'one')
+  t.is(runtime.defaultPlugin.commands[4].name, 'three')
+  t.is(runtime.defaultPlugin.commands[5].name, 'two')
 })

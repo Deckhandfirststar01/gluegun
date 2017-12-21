@@ -1,4 +1,4 @@
-import print from './print'
+import * as print from './print'
 import { commandInfo } from './command-info'
 
 /**

@@ -95,7 +95,7 @@ export class Builder {
     if (typeof command === 'function') {
       command = { run: command }
     }
-    command.name = this.brand
+    command.name = this.runtime.brand
     return this.command(command)
   }
 

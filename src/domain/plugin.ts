@@ -1,4 +1,6 @@
 import Command from './command'
+import Extension from './extension'
+import Options from './options'
 
 /**
  * Extends the environment with new commands.
@@ -6,11 +8,11 @@ import Command from './command'
 class Plugin {
   name?: string
   description?: string
-  defaults: object
+  defaults: Options
   directory?: string
   hidden: boolean
   commands: Command[]
-  extensions: object[]
+  extensions: Extension[]
 
   constructor() {
     this.name = null

@@ -9,8 +9,9 @@ import Plugin from '../domain/plugin'
 import Command from '../domain/command'
 import Extension from '../domain/extension'
 
-import { isNil, dissoc } from 'ramda'
+import { dissoc } from 'ramda'
 import { resolve } from 'path'
+import Options from '../domain/options'
 
 /**
  * Loads plugins, extensions, and invokes the intended command.
@@ -118,14 +119,14 @@ class Runtime {
    *
    * @param  {string} directory The directory to load from.
    * @param  {Object} options   Additional loading options.
-   * @return {Plugin}           The plugin that was created.
+   * @return {Plugin | null}           The plugin that was created.
    */
-  addPlugin(directory: string, options: object = {}): Plugin {
+  addPlugin(directory: string, options: Options = {}): Plugin | null {
     if (!isDirectory(directory)) {
       if (options.required) {
         throw new Error(`Error: couldn't load plugin (not a directory): ${directory}`)
       } else {
-        return this
+        return
       }
     }
 
@@ -151,7 +152,7 @@ class Runtime {
    * @return {Runtime}         This runtime
    */
   addPlugins(directory: string, options: object = {}): Plugin[] {
-    if (isBlank(directory) || !isDirectory(directory)) return this
+    if (isBlank(directory) || !isDirectory(directory)) return []
 
     // find matching subdirectories
     const subdirs = subdirectories(directory, false, options['matching'], true)

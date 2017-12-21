@@ -1,4 +1,4 @@
-import { always, is, isEmpty, pipe, when } from 'ramda'
+import { is, isEmpty, pipe } from 'ramda'
 import * as camelCase from 'lodash.camelcase'
 import * as kebabCase from 'lodash.kebabcase'
 import * as snakeCase from 'lodash.snakecase'

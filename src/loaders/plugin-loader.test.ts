@@ -4,7 +4,6 @@ import { find, propEq } from 'ramda'
 import RunContext from '../domain/run-context'
 
 test('deals with weird input', t => {
-  t.throws(() => loadPluginFromDirectory(''))
   t.throws(() => loadPluginFromDirectory(`${__dirname}/gonebabygone`))
 })
 

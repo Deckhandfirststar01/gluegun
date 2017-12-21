@@ -6,12 +6,13 @@
   "bin": {
     "gluegun": "bin/gluegun"
   },
-  "main": "dist/gluegun.js",
+  "main": "dist/index.js",
   "scripts": {
     "precommit": "lint-staged",
     "format": "prettier --write \"**/*.ts\" && tslint -p . --fix",
-    "build": "yarn format && tsc -p . && cp -a ./src/cli/templates ./build/cli/",
+    "compile": "tsc -p .",
     "rollup": "rollup -c && cp -a ./build/cli ./dist/",
+    "build": "yarn format && yarn compile && cp -a ./src/cli/templates ./build/cli/ && yarn rollup",
     "lint": "tslint -p .",
     "test": "ava-ts",
     "watch": "ava-ts --watch",

@@ -75,7 +75,7 @@ module.exports = {
 
     // rename default.js to project name
     const ext = props.typescript ? 'ts' : 'js'
-    filesystem.rename(`${props.name}/src/commands/default.${ext}`, `${props.name}/src/commands/${props.name}.${ext}`)
+    filesystem.rename(`${props.name}/src/commands/default.${ext}`, `${props.name}.${ext}`)
 
     await system.spawn(`cd ${props.name} && npm i && npm run format`, {
       shell: true,

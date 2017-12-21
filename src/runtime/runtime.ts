@@ -78,7 +78,14 @@ class Runtime {
       )
     }
     const newCommand: Command = loadCommandFromPreload(command)
-    this.defaultPlugin.commands.unshift(newCommand)
+
+    if (newCommand.name === this.brand) {
+      // default command is always the last command in the stack
+      this.defaultPlugin.commands.push(newCommand)
+    } else {
+      // other commands go first
+      this.defaultPlugin.commands.unshift(newCommand)
+    }
     return this
   }
 

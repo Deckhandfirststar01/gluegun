@@ -10,7 +10,7 @@
   "scripts": {
     "precommit": "lint-staged",
     "format": "prettier --write \"**/*.ts\" && tslint -p . --fix",
-    "build": "yarn format && tsc -p .",
+    "build": "yarn format && tsc -p . && cp -a ./src/cli/templates ./build/cli/",
     "rollup": "rollup -c && cp -a ./build/cli ./dist/",
     "lint": "tslint -p .",
     "test": "ava-ts",

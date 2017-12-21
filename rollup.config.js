@@ -32,10 +32,13 @@ export default {
     // .. this causes rollup to barf, so we're replacing those with harmless code
     stripProblematicCode(),
 
-    // this converts CommonJS modules to ES6 modules, which is apparently necess
+    // this converts CommonJS modules to ES6 modules, which is apparently necessary
     commonjs({
+      // ignore any dynamic requires, since this plugin can't do anything with them
+      // gluegun, of course, uses a lot of dynamic requires!
       ignore: true,
     }),
+
     // needed to get by some weird error.
     // via https://github.com/rollup/rollup-plugin-commonjs/issues/28#issuecomment-167934572
     json(),

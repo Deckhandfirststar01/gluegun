@@ -1,6 +1,6 @@
 import * as colors from 'colors'
-import ora from 'ora'
 import * as CLITable from 'cli-table2'
+const ora = require('ora')
 
 const CLI_TABLE_COMPACT = {
   top: '',

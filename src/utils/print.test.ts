@@ -1,6 +1,6 @@
 import test from 'ava'
 import * as sinon from 'sinon'
-import stripAnsi from 'strip-ansi'
+const stripAnsi = require('strip-ansi')
 
 // couldn't figure out a way to reset the spy on console.log
 // for each run... switched to .serial and incrementing.  sorry.  :(

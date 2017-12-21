@@ -27,14 +27,6 @@ export default {
   plugins: [
     // nice progress bar
     progress(),
-    // this goes out and finds all the linked files with import / require statements
-    // this is the real power behind rollup
-    // i don't actually know if these are the right options, but they look right
-    // resolve({
-    //   jsnext: true,
-    //   main: true,
-    //   preferBuiltins: false,
-    // }),
 
     // so it turns out lots of people like to reassign `require` to something else temporarily
     // .. this causes rollup to barf, so we're replacing those with harmless code
@@ -44,9 +36,11 @@ export default {
     commonjs({
       ignore: true,
     }),
-    // Needed to get by some weird error.
-    // Via https://github.com/rollup/rollup-plugin-commonjs/issues/28#issuecomment-167934572
+    // needed to get by some weird error.
+    // via https://github.com/rollup/rollup-plugin-commonjs/issues/28#issuecomment-167934572
     json(),
+
+    // shows
     filesize(),
   ],
 }

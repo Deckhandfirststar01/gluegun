@@ -19,7 +19,7 @@ test('hides commands', t => {
 
 test('silently ignore plugins with broken dirs', async t => {
   const r = new Runtime()
-  const error = await r.addPlugin(BAD_PLUGIN_PATH)
+  const error = r.addPlugin(BAD_PLUGIN_PATH)
   t.is(undefined, error)
 })
 

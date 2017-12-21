@@ -16,12 +16,12 @@ module.exports = {
     if (!props.name || props.name.length === 0) {
       print.error('You must provide a valid CLI name.')
       print.error('Example: gluegun new foo')
-      return
+      return undefined
     } else if (!/^[a-z0-9-]+$/.test(props.name)) {
       const validName = kebabCase(props.name)
       print.error(`${props.name} is not a valid name. Use lower-case and dashes only.`)
       print.error(`Suggested: gluegun new ${validName}`)
-      return
+      return undefined
     }
 
     await filesystem.dir(props.name)
@@ -75,10 +75,7 @@ module.exports = {
 
     // rename default.js to project name
     const ext = props.typescript ? 'ts' : 'js'
-    filesystem.rename(
-      `${props.name}/src/commands/default.${ext}`,
-      `${props.name}/src/commands/${props.name}.${ext}`
-    )
+    filesystem.rename(`${props.name}/src/commands/default.${ext}`, `${props.name}/src/commands/${props.name}.${ext}`)
 
     await system.spawn(`cd ${props.name} && npm i && npm run format`, {
       shell: true,

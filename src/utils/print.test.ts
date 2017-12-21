@@ -15,7 +15,7 @@ const spyLog = sinon.spy(console, 'log')
 // finally require the print
 const print = require('./print')
 
-test.before(() => {})
+// test.before(() => null)
 
 test.after.always(() => {
   spyLog.reset()

@@ -1,5 +1,5 @@
 {
-  "extends": "tslint-config-standard",
+  "extends": "tslint-config-prettier",
   "rules": {
     "trailing-comma": [true],
     "no-string-throw": false

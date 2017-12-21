@@ -10,7 +10,7 @@ test('handles weird input', t => {
   t.throws(() => loadModule(false))
   t.throws(() => loadModule([]))
   t.throws(() => loadModule({}))
-  t.throws(() => loadModule(() => {}))
+  t.throws(() => loadModule(() => null))
 })
 
 test('detects missing file', t => {

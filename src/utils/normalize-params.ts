@@ -49,7 +49,7 @@ export function createParams(params) {
   const third = array[2]
 
   // the string is the rest of the words
-  const string = array.join(' ')
+  const finalString = array.join(' ')
 
   // :shipit:
   return Object.assign(params, {
@@ -57,6 +57,6 @@ export function createParams(params) {
     first,
     second,
     third,
-    string,
+    string: finalString,
   })
 }

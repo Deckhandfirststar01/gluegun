@@ -126,7 +126,7 @@ class Runtime {
       if (options.required) {
         throw new Error(`Error: couldn't load plugin (not a directory): ${directory}`)
       } else {
-        return
+        return undefined
       }
     }
 

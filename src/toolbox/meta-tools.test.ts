@@ -1,5 +1,5 @@
 import test from 'ava'
-import { commandInfo } from './command-info'
+import { commandInfo } from './meta-tools'
 import RunContext from '../domain/run-context'
 import Runtime from '../runtime/runtime'
 import Plugin from '../domain/plugin'

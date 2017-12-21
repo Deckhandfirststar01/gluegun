@@ -1,5 +1,5 @@
-import { isBlank } from '../utils/string-utils'
-import { subdirectories, isDirectory } from '../utils/filesystem-utils'
+import { isBlank } from '../toolbox/string-tools'
+import { subdirectories, isDirectory } from '../toolbox/filesystem-tools'
 import { loadPluginFromDirectory } from '../loaders/plugin-loader'
 import { loadConfig } from '../loaders/config-loader'
 import { loadCommandFromPreload } from '../loaders/command-loader'
@@ -111,7 +111,7 @@ class Runtime {
    * @return {Runtime}          This runtime.
    */
   addDefaultPlugin(directory: string, options: object = {}): Runtime {
-    this.defaultPlugin = this.addPlugin(directory, Object.assign({ required: true, name: this.brand }, options))
+    this.defaultPlugin = this.addPlugin(directory, { required: true, name: this.brand, ...options })
 
     // load config and set defaults
     const config = loadConfig(this.brand, directory) || {}

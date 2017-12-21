@@ -1,4 +1,4 @@
-const stringUtils = require('../utils/string-utils')
+const stringTools = require('../toolbox/string-tools')
 
 /**
  * Attaches some string helpers for convenience.
@@ -6,7 +6,7 @@ const stringUtils = require('../utils/string-utils')
  * @param  {RunContext} context The running context.
  */
 function attach(context) {
-  context.strings = stringUtils
+  context.strings = stringTools
 }
 
 module.exports = attach

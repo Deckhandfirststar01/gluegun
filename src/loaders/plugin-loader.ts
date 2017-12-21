@@ -3,8 +3,8 @@ import Plugin from '../domain/plugin'
 import { loadConfig } from './config-loader'
 import { loadCommandFromFile, loadCommandFromPreload } from './command-loader'
 import { loadExtensionFromFile } from './extension-loader'
-import { isNotDirectory } from '../utils/filesystem-utils'
-import { isBlank } from '../utils/string-utils'
+import { isNotDirectory } from '../toolbox/filesystem-tools'
+import { isBlank } from '../toolbox/string-tools'
 import { map } from 'ramda'
 
 /**

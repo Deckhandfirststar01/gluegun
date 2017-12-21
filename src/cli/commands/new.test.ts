@@ -1,6 +1,6 @@
 import test from 'ava'
 import * as sinon from 'sinon'
-import * as strings from '../../utils/string-utils'
+import * as strings from '../../toolbox/string-tools'
 import RunContext from '../../domain/run-context'
 
 const command = require('./new')

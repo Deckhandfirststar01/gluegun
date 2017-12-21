@@ -31,9 +31,8 @@ const attachPatchingExtension = require('./core-extensions/patching-extension')
 
 // bring in some context
 import { build, Builder } from './domain/builder'
-import * as strings from './utils/string-utils'
-import * as print from './utils/print'
-import { printHelp, printCommands } from './utils/print-help'
+import * as strings from './toolbox/string-tools'
+import * as print from './toolbox/print-tools'
 
 // we want to see real exceptions with backtraces and stuff
 process.removeAllListeners('unhandledRejection')
@@ -45,7 +44,7 @@ require('app-module-path').addPath(`${__dirname}/../node_modules`)
 require('app-module-path').addPath(process.cwd())
 // ----------------------------------------------------------------------------
 
-// wrap all this in a function call to avoid global scoping
+const { printCommands, printHelp } = print
 
 const context: { build: () => Builder; [key: string]: any } = {
   build,
@@ -64,7 +63,4 @@ attachTemplateExtension(context)
 attachPatchingExtension(context)
 
 export { build, strings, print, printCommands, printHelp }
-
-// export our API
-// export { build, strings, print, printCommands, printHelp }
 export default context

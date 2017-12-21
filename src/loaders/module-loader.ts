@@ -1,11 +1,10 @@
-import { isBlank } from '../utils/string-utils'
-import { isNotFile } from '../utils/filesystem-utils'
-import { throwWhen } from '../utils/throw-when'
+import { isBlank } from '../toolbox/string-tools'
+import { isNotFile } from '../toolbox/filesystem-tools'
 
 // try loading this module
 function loadModule(path) {
-  throwWhen('path is required', isBlank, path)
-  throwWhen(`${path} is not a file`, isNotFile, path)
+  if (isBlank(path)) throw new Error('path is required')
+  if (isNotFile(path)) throw new Error(`${path} is not a file`)
 
   require.resolve(path)
   return require(path)

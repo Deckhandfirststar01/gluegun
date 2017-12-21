@@ -1,6 +1,6 @@
 import * as jetpack from 'fs-jetpack'
 import { map, concat, complement } from 'ramda'
-import { isBlank } from './string-utils'
+import { isBlank } from './string-tools'
 
 /**
  * Is this a file?

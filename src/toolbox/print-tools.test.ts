@@ -10,7 +10,7 @@ console.log = (x, y) => spyLogger.push([x, y])
 // const spyLog = sinon.spy(console, 'log')
 
 // finally require the print
-const print = require('./print')
+const print = require('./print-tools')
 
 // test.before(() => null)
 

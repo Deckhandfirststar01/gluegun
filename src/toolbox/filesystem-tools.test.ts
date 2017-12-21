@@ -1,5 +1,5 @@
 import test from 'ava'
-import { isFile, isNotFile, isDirectory, isNotDirectory, subdirectories } from './filesystem-utils'
+import { isFile, isNotFile, isDirectory, isNotDirectory, subdirectories } from './filesystem-tools'
 import { contains } from 'ramda'
 
 test('isFile', t => {
@@ -25,7 +25,7 @@ test('isNotDirectory', t => {
 test('subdirectories', t => {
   const dirs = subdirectories(`${__dirname}/..`)
   t.is(dirs.length, 8)
-  t.true(contains(`${__dirname}/../utils`, dirs))
+  t.true(contains(`${__dirname}/../toolbox`, dirs))
 })
 
 test('blank subdirectories', t => {
@@ -36,11 +36,11 @@ test('blank subdirectories', t => {
 test('relative subdirectories', t => {
   const dirs = subdirectories(`${__dirname}/..`, true)
   t.is(dirs.length, 8)
-  t.true(contains(`utils`, dirs))
+  t.true(contains(`toolbox`, dirs))
 })
 
 test('filtered subdirectories', t => {
-  const dirs = subdirectories(`${__dirname}/..`, true, 'ut*')
+  const dirs = subdirectories(`${__dirname}/..`, true, 'to*')
   t.is(1, dirs.length)
-  t.true(contains(`utils`, dirs))
+  t.true(contains(`toolbox`, dirs))
 })

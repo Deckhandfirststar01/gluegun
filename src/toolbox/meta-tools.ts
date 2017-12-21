@@ -1,7 +1,37 @@
+import * as jetpack from 'fs-jetpack'
 import { pipe, map, sortBy, prop, propEq, reject, replace, unnest, equals } from 'ramda'
-
 import RunContext from '../domain/run-context'
 import Plugin from '../domain/plugin'
+/**
+ * Finds the version for the currently running CLI.
+ *
+ * @param {RunContext} context
+ */
+export function getVersion(context: RunContext): string {
+  let directory = context.runtime.defaultPlugin && context.runtime.defaultPlugin.directory
+  if (!directory) {
+    throw new Error('context.version: Unknown CLI version (no src folder found)')
+  }
+
+  // go at most 5 directories up to find the package.json
+  for (let i = 0; i < 5; i += 1) {
+    const pkg = jetpack.path(directory, 'package.json')
+
+    // if we find a package.json, we're done -- read the version and return it
+    if (jetpack.exists(pkg) === 'file') {
+      return jetpack.read(pkg, 'json').version
+    }
+
+    // if we reach the git repo or root, we can't determine the version -- this is where we bail
+    const git = jetpack.path(directory, '.git')
+    const root = jetpack.path('/')
+    if (directory === root || jetpack.exists(git) === 'dir') break
+
+    // go up another directory
+    directory = jetpack.path(directory, '..')
+  }
+  throw new Error(`context.version: Unknown CLI version (no package.json found in ${directory}`)
+}
 
 /**
  * Is this a hidden command?

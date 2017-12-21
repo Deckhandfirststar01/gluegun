@@ -1,6 +1,6 @@
 import * as jetpack from 'fs-jetpack'
-import { isFile, isNotFile } from '../utils/filesystem-utils'
-import { isNotString } from '../utils/string-utils'
+import { isFile, isNotFile } from '../toolbox/filesystem-tools'
+import { isNotString } from '../toolbox/string-tools'
 import { test } from 'ramda'
 
 /**

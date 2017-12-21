@@ -1,8 +1,8 @@
 import * as ejs from 'ejs'
 import * as jetpack from 'fs-jetpack'
 import { replace, forEach, keys } from 'ramda'
-import * as stringUtils from '../utils/string-utils'
-import { isFile } from '../utils/filesystem-utils'
+import * as stringTools from '../toolbox/string-tools'
+import { isFile } from '../toolbox/filesystem-tools'
 import Options from '../domain/options'
 
 /**
@@ -34,10 +34,10 @@ function attach(context) {
       props: props,
     }
 
-    // add our string utils to the filters available.
+    // add our string tools to the filters available.
     forEach(x => {
-      data[x] = stringUtils[x]
-    }, keys(stringUtils))
+      data[x] = stringTools[x]
+    }, keys(stringTools))
 
     // pick a base directory for templates
     const directory = opts.directory ? opts.directory : `${plugin && plugin.directory}/templates`
@@ -56,7 +56,7 @@ function attach(context) {
     const content = ejs.render(templateContent, data)
 
     // save it to the file system
-    if (!stringUtils.isBlank(target)) {
+    if (!stringTools.isBlank(target)) {
       // prep the destination directory
       const dir = replace(/$(\/)*/g, '', target)
       const dest = jetpack.path(dir)

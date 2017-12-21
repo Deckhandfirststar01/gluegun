@@ -1,5 +1,6 @@
 import * as colors from 'colors'
 import * as CLITable from 'cli-table2'
+import { commandInfo } from './meta-tools'
 const ora = require('ora')
 
 const CLI_TABLE_COMPACT = {
@@ -183,4 +184,51 @@ function spin(config: string | object) {
   return ora(config).start()
 }
 
-export { info, warning, success, error, debug, fancy, divider, newline, table, spin, colors }
+/**
+ * Prints the list of commands.
+ *
+ * @param {RunContext} context     The context that was used
+ * @param {string[]} commandRoot   Optional, only show commands with this root
+ */
+function printCommands(context, commandRoot?: string[]) {
+  let printPlugins = []
+  if (context.plugin === context.defaultPlugin) {
+    // print for all plugins
+    printPlugins = context.plugins
+  } else {
+    // print for one plugin
+    printPlugins = [context.plugin]
+  }
+
+  const data = commandInfo(context, printPlugins, commandRoot)
+
+  newline() // a spacer
+  table(data) // the data
+}
+
+function printHelp(context) {
+  const { runtime: { brand } } = context
+  info(`${brand} version ${context.meta.version()}`)
+  printCommands(context)
+}
+
+const checkmark = colors.success('✔︎')
+const xmark = colors.error('ⅹ')
+
+export {
+  info,
+  warning,
+  success,
+  error,
+  debug,
+  fancy,
+  divider,
+  newline,
+  table,
+  spin,
+  colors,
+  printCommands,
+  printHelp,
+  checkmark,
+  xmark,
+}

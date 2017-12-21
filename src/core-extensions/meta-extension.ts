@@ -1,5 +1,4 @@
-import { getVersion } from '../utils/get-version'
-import { commandInfo } from '../utils/command-info'
+import { getVersion, commandInfo } from '../toolbox/meta-tools'
 
 /**
  * Extension that lets you learn more about the currently running CLI.

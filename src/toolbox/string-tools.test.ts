@@ -1,5 +1,5 @@
 import test from 'ava'
-import * as stringUtils from './string-utils'
+import * as stringUtils from './string-tools'
 const {
   identity,
   isBlank,

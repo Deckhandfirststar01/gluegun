@@ -1,5 +1,5 @@
-import { isNotFile } from '../utils/filesystem-utils'
-import { isBlank } from '../utils/string-utils'
+import { isNotFile } from '../toolbox/filesystem-tools'
+import { isBlank } from '../toolbox/string-tools'
 import loadModule from './module-loader'
 import * as jetpack from 'fs-jetpack'
 import { head, split } from 'ramda'

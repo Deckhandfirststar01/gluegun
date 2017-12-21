@@ -1,7 +1,7 @@
 import * as jetpack from 'fs-jetpack'
 import * as os from 'os'
 import * as path from 'path'
-import { subdirectories } from '../utils/filesystem-utils'
+import { subdirectories } from '../toolbox/filesystem-tools'
 
 /**
  * Extensions to filesystem.  Brought to you by fs-jetpack.

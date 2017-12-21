@@ -1,4 +1,4 @@
-import { parseParams, createParams } from '../utils/normalize-params'
+import { parseParams, createParams } from '../toolbox/parameter-tools'
 import { isNil, clone, merge } from 'ramda'
 import RunContext from '../domain/run-context'
 import Runtime from './runtime'

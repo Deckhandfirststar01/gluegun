@@ -6,6 +6,7 @@
   "bin": {
     "gluegun": "bin/gluegun"
   },
+  "main": "dist/gluegun.js",
   "scripts": {
     "compile": "tsc -p .",
     "precommit": "lint-staged",
@@ -14,8 +15,7 @@
     "snapupdate": "ava --update-snapshots",
     "coverage": "nyc --reporter=lcov --reporter=html --reporter=text ava",
     "coveralls": "nyc ava-ts && nyc report --reporter=text-lcov | coveralls",
-    "format": "prettier --write \"**/*.js\" && standard --fix",
-    "lint": "standard",
+    "rollup": "rollup -c && cp -a ./build/cli ./dist/",
     "shipit": "np --yolo"
   },
   "author": {
@@ -23,7 +23,6 @@
     "email": "npm@infinite.red",
     "url": "https://github.com/infinitered/gluegun"
   },
-  "main": "dist/gluegun.js",
   "files": ["docs", "bin", "src", "sniff.js", "LICENSE", "readme.md"],
   "license": "MIT",
   "dependencies": {
@@ -66,8 +65,7 @@
     "ramda": "^0.25.0",
     "ramdasauce": "^2.1.0",
     "semver": "^5.3.0",
-    "ts-node": "^4.0.2",
-    "typescript": "^2.6.2",
+    "spawn-sync": "^1.0.15",
     "which": "^1.2.14",
     "yargs-parser": "^8.0.0"
   },
@@ -83,10 +81,20 @@
     "np": "^2.16.0",
     "nyc": "^11.2.1",
     "prettier": "^1.9.2",
+    "rollup": "^0.52.3",
+    "rollup-plugin-commonjs": "^8.2.6",
+    "rollup-plugin-filesize": "^1.5.0",
+    "rollup-plugin-json": "^2.3.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-progress": "^0.4.0",
+    "rollup-plugin-re": "^1.0.6",
+    "rollup-plugin-uglify-es": "^0.0.1",
     "sinon": "^4.0.1",
     "temp-write": "^3.3.0",
+    "ts-node": "^4.0.2",
     "tslint": "^5.8.0",
-    "tslint-config-prettier": "^1.6.0"
+    "tslint-config-prettier": "^1.6.0",
+    "typescript": "^2.6.2"
   },
   "ava": {},
   "prettier": {

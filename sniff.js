@@ -9,7 +9,7 @@ let ok = false
 
 // check for the harmony-enabled features
 try {
-  require('./src/utils/async-await-check')
+  require('./sniff-async')
   hasAsyncAwait = true
 } catch (e) {}
 

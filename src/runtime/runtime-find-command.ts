@@ -1,9 +1,9 @@
+import { equals, find, isNil, reduce, sort } from 'ramda'
 import { isNilOrEmpty } from 'ramdasauce'
-import { find, isNil, equals, reduce, sort } from 'ramda'
 
-import Runtime from './runtime'
 import Command from '../domain/command'
 import Plugin from '../domain/plugin'
+import Runtime from './runtime'
 
 /**
  * This function performs some somewhat complex logic to find a command for a given
@@ -13,7 +13,7 @@ import Plugin from '../domain/plugin'
  * @param {any} parameters The parameters passed in
  * @returns { plugin: Plugin|null, command: Command|null, array: string[] }
  */
-export function findCommand(
+export function findCommand (
   runtime: Runtime,
   parameters: any,
 ): { plugin: Plugin | null; command: Command | null; array: string[] } {
@@ -29,7 +29,9 @@ export function findCommand(
   // loop through each plugin, looking for a command that matches the parameters
   const targetPlugin = find((plugin: Plugin) => {
     // if the plugin doesn't have any commands, we can skip it
-    if (isNil(plugin) || isNilOrEmpty(plugin.commands)) return false
+    if (isNil(plugin) || isNilOrEmpty(plugin.commands)) {
+      return false
+    }
 
     // track the rest of the commandPath as we traverse
     rest = commandPath.slice() // dup

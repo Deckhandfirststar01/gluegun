@@ -4,16 +4,16 @@ import RunContext from './run-context'
  * A command is user-callable function that runs stuff.
  */
 class Command {
-  name?: string
-  description?: string
-  file?: string
-  run?: (context: RunContext) => any
-  hidden: boolean
-  commandPath?: string[]
-  alias: string[]
-  dashed: boolean
+  public name?: string
+  public description?: string
+  public file?: string
+  public run?: (context: RunContext) => any
+  public hidden: boolean
+  public commandPath?: string[]
+  public alias: string[]
+  public dashed: boolean
 
-  constructor() {
+  constructor () {
     this.name = null
     this.description = null
     this.file = null
@@ -24,14 +24,14 @@ class Command {
     this.dashed = false
   }
 
-  get aliases(): string[] {
+  get aliases (): string[] {
     if (!this.alias) {
       return []
     }
     return Array.isArray(this.alias) ? this.alias : [this.alias]
   }
 
-  hasAlias() {
+  public hasAlias () {
     return this.aliases.length > 0
   }
 
@@ -41,7 +41,7 @@ class Command {
    *
    * @param {string|string[]} alias
    */
-  matchesAlias(alias) {
+  public matchesAlias (alias) {
     const aliases = Array.isArray(alias) ? alias : [alias]
     return aliases.find(a => this.name === a || this.aliases.includes(a))
   }

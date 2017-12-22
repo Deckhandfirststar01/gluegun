@@ -1,16 +1,16 @@
-import { isNotFile } from '../toolbox/filesystem-tools'
-import { isBlank } from '../toolbox/string-tools'
-import loadModule from './module-loader'
 import * as jetpack from 'fs-jetpack'
 import { head, split } from 'ramda'
 import Extension from '../domain/extension'
+import { isNotFile } from '../toolbox/filesystem-tools'
+import { isBlank } from '../toolbox/string-tools'
+import loadModule from './module-loader'
 
 /**
  * Loads the extension from a file.
  *
  * @param {string} file         The full path to the file to load.
  */
-export function loadExtensionFromFile(file, options = {}) {
+export function loadExtensionFromFile (file, options = {}) {
   const extension = new Extension()
 
   // sanity check the input

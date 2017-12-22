@@ -4,8 +4,7 @@ module.exports = {
   description: 'Creates a new gluegun cli',
   hidden: false,
   run: async context => {
-    const { parameters, template, filesystem, print, strings, system } = context
-    const { generate } = template
+    const { parameters, template: { generate }, filesystem, print, strings, system } = context
     const { kebabCase } = strings
 
     const props = {
@@ -33,7 +32,7 @@ module.exports = {
       generate({
         template: `cli/bin/cli-executable.ejs`,
         target: `./${props.name}/bin/${props.name}`,
-        props: props,
+        props,
       }),
     )
 

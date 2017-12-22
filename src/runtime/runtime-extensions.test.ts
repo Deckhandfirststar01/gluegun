@@ -1,6 +1,6 @@
 import test from 'ava'
+import { join, pipe, pluck } from 'ramda'
 import Runtime from './runtime'
-import { pipe, pluck, join } from 'ramda'
 
 test('loads the core extensions in the right order', t => {
   const r = new Runtime()

@@ -1,5 +1,5 @@
+import { equals, is, merge } from 'ramda'
 import * as yargsParse from 'yargs-parser'
-import { merge, is, equals } from 'ramda'
 import { RunContextParameters } from '../domain/run-context'
 
 const COMMAND_DELIMITER = ' '
@@ -11,7 +11,7 @@ const COMMAND_DELIMITER = ' '
  * @param {Object} extraOpts
  * @returns {RunContextParameters}
  */
-export function parseParams(commandArray, extraOpts = {}): RunContextParameters {
+export function parseParams (commandArray, extraOpts = {}): RunContextParameters {
   // use the command line args if not passed in
   if (is(String, commandArray)) {
     commandArray = commandArray.split(COMMAND_DELIMITER)
@@ -36,13 +36,17 @@ export function parseParams(commandArray, extraOpts = {}): RunContextParameters 
  * @param {{}} params         Provided parameters
  * @return {{}}               An object with normalized parameters
  */
-export function createParams(params) {
+export function createParams (params) {
   // make a copy of the args so we can mutate it
   const array = params.array.slice()
 
   // Remove the first two elements from the array if they're the plugin and command
-  if (array[0] === params.plugin) array.shift()
-  if (array[0] === params.command) array.shift()
+  if (array[0] === params.plugin) {
+    array.shift()
+  }
+  if (array[0] === params.command) {
+    array.shift()
+  }
 
   const first = array[0]
   const second = array[1]
@@ -52,11 +56,12 @@ export function createParams(params) {
   const finalString = array.join(' ')
 
   // :shipit:
-  return Object.assign(params, {
+  return {
+    ...params,
     array,
     first,
     second,
     third,
     string: finalString,
-  })
+  }
 }

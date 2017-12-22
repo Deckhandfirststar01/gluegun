@@ -1,6 +1,6 @@
 import test from 'ava'
-import { loadCommandFromFile, loadCommandFromPreload } from './command-loader'
 import RunContext from '../domain/run-context'
+import { loadCommandFromFile, loadCommandFromPreload } from './command-loader'
 
 test('loading from a missing file', async t => {
   const error = await t.throws(() => loadCommandFromFile('foo.js'), Error)

@@ -6,15 +6,15 @@ import Options from './options'
  * Extends the environment with new commands.
  */
 class Plugin {
-  name?: string
-  description?: string
-  defaults: Options
-  directory?: string
-  hidden: boolean
-  commands: Command[]
-  extensions: Extension[]
+  public name?: string
+  public description?: string
+  public defaults: Options
+  public directory?: string
+  public hidden: boolean
+  public commands: Command[]
+  public extensions: Extension[]
 
-  constructor() {
+  constructor () {
     this.name = null
     this.description = null
     this.defaults = {}

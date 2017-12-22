@@ -1,6 +1,6 @@
 import test from 'ava'
-import { isFile, isNotFile, isDirectory, isNotDirectory, subdirectories } from './filesystem-tools'
 import { contains } from 'ramda'
+import { isDirectory, isFile, isNotDirectory, isNotFile, subdirectories } from './filesystem-tools'
 
 test('isFile', t => {
   t.true(isFile(__filename))

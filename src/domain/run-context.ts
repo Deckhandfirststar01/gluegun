@@ -1,8 +1,8 @@
-import Plugin from './plugin'
-import Command from './command'
-import Runtime from '../runtime/runtime'
-import Options from './options'
 import { GluegunRunContext } from '../index'
+import Runtime from '../runtime/runtime'
+import Command from './command'
+import Options from './options'
+import Plugin from './plugin'
 
 export interface RunContextParameters {
   array?: string[]
@@ -36,17 +36,17 @@ export default class RunContext implements GluegunRunContext {
   [key: string]: any
 
   // known properties
-  result?: any
-  error?: any
-  config: object
-  parameters?: RunContextParameters
-  plugin?: Plugin
-  command?: Command
-  pluginName?: string
-  commandName?: string
-  runtime?: Runtime
+  public result?: any
+  public error?: any
+  public config: object
+  public parameters?: RunContextParameters
+  public plugin?: Plugin
+  public command?: Command
+  public pluginName?: string
+  public commandName?: string
+  public runtime?: Runtime
 
-  constructor() {
+  constructor () {
     /**
      * The result of the run command.
      */

@@ -1,5 +1,5 @@
 import * as jetpack from 'fs-jetpack'
-import { map, concat, complement } from 'ramda'
+import { complement, concat, map } from 'ramda'
 import { isBlank } from './string-tools'
 
 /**
@@ -49,7 +49,9 @@ const subdirectories = (
   matching: string = '*',
   symlinks: boolean = false,
 ) => {
-  if (isBlank(base) || !isDirectory(base)) return []
+  if (isBlank(base) || !isDirectory(base)) {
+    return []
+  }
   const dirs = jetpack.cwd(base).find({
     matching,
     directories: true,

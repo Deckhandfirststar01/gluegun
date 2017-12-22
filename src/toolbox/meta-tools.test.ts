@@ -1,9 +1,9 @@
 import test from 'ava'
-import { commandInfo } from './meta-tools'
+import Command from '../domain/command'
+import Plugin from '../domain/plugin'
 import RunContext from '../domain/run-context'
 import Runtime from '../runtime/runtime'
-import Plugin from '../domain/plugin'
-import Command from '../domain/command'
+import { commandInfo } from './meta-tools'
 
 test('commandInfo', t => {
   const fakeContext = new RunContext()

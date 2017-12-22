@@ -28,7 +28,15 @@
     "email": "npm@infinite.red",
     "url": "https://github.com/infinitered/gluegun"
   },
-  "files": ["docs", "bin", "dist", "sniff.js", "sniff-async.js", "LICENSE", "readme.md"],
+  "files": [
+    "docs",
+    "bin",
+    "dist",
+    "sniff.js",
+    "sniff-async.js",
+    "LICENSE",
+    "readme.md"
+  ],
   "license": "MIT",
   "dependencies": {
     "apisauce": "^0.14.1",
@@ -100,6 +108,7 @@
     "ts-node": "^4.0.2",
     "tslint": "^5.8.0",
     "tslint-config-prettier": "^1.6.0",
+    "tslint-config-standard": "^7.0.0",
     "typescript": "^2.6.2"
   },
   "ava": {},
@@ -110,8 +119,18 @@
     "trailingComma": "all"
   },
   "lint-staged": {
-    "*.ts": ["prettier --write", "tslint --fix", "git add"],
-    "*.md": ["prettier --write", "git add"],
-    "*.json": ["prettier --write", "git add"]
+    "*.ts": [
+      "prettier --write",
+      "tslint --fix",
+      "git add"
+    ],
+    "*.md": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.json": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }

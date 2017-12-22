@@ -31,8 +31,8 @@ const attachPatchingExtension = require('./core-extensions/patching-extension')
 
 // bring in some context
 import { build, Builder } from './domain/builder'
-import * as strings from './toolbox/string-tools'
 import * as print from './toolbox/print-tools'
+import * as strings from './toolbox/string-tools'
 
 // we want to see real exceptions with backtraces and stuff
 process.removeAllListeners('unhandledRejection')

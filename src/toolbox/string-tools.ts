@@ -1,20 +1,20 @@
-import { is, isEmpty, pipe } from 'ramda'
 import * as camelCase from 'lodash.camelcase'
 import * as kebabCase from 'lodash.kebabcase'
-import * as snakeCase from 'lodash.snakecase'
-import * as upperCase from 'lodash.uppercase'
 import * as lowerCase from 'lodash.lowercase'
-import * as startCase from 'lodash.startcase'
-import * as upperFirst from 'lodash.upperfirst'
 import * as lowerFirst from 'lodash.lowerfirst'
 import * as pad from 'lodash.pad'
-import * as padStart from 'lodash.padstart'
 import * as padEnd from 'lodash.padend'
-import * as trim from 'lodash.trim'
-import * as trimStart from 'lodash.trimstart'
-import * as trimEnd from 'lodash.trimend'
+import * as padStart from 'lodash.padstart'
 import * as repeat from 'lodash.repeat'
+import * as snakeCase from 'lodash.snakecase'
+import * as startCase from 'lodash.startcase'
+import * as trim from 'lodash.trim'
+import * as trimEnd from 'lodash.trimend'
+import * as trimStart from 'lodash.trimstart'
+import * as upperCase from 'lodash.uppercase'
+import * as upperFirst from 'lodash.upperfirst'
 import * as pluralize from 'pluralize'
+import { is, isEmpty, pipe } from 'ramda'
 
 const {
   plural,
@@ -53,7 +53,7 @@ const isBlank = (value: any) => {
  * @param {any} value
  * @returns     the value.
  */
-function identity(value) {
+function identity (value) {
   return value
 }
 
@@ -63,7 +63,7 @@ function identity(value) {
  * @param {string} value The string to convert
  * @returns {string}
  */
-function pascalCase(value) {
+function pascalCase (value) {
   return pipe(camelCase, upperFirst)(value)
 }
 

@@ -1,34 +1,34 @@
-import { isBlank } from '../toolbox/string-tools'
-import { subdirectories, isDirectory } from '../toolbox/filesystem-tools'
-import { loadPluginFromDirectory } from '../loaders/plugin-loader'
-import { loadConfig } from '../loaders/config-loader'
-import { loadCommandFromPreload } from '../loaders/command-loader'
-import { run } from './run'
-import RunContext from '../domain/run-context'
-import Plugin from '../domain/plugin'
 import Command from '../domain/command'
 import Extension from '../domain/extension'
+import Plugin from '../domain/plugin'
+import RunContext from '../domain/run-context'
+import { loadCommandFromPreload } from '../loaders/command-loader'
+import { loadConfig } from '../loaders/config-loader'
+import { loadPluginFromDirectory } from '../loaders/plugin-loader'
+import { isDirectory, subdirectories } from '../toolbox/filesystem-tools'
+import { isBlank } from '../toolbox/string-tools'
+import { run } from './run'
 
-import { dissoc } from 'ramda'
 import { resolve } from 'path'
+import { dissoc } from 'ramda'
 import Options from '../domain/options'
 
 /**
  * Loads plugins, extensions, and invokes the intended command.
  */
 class Runtime {
-  brand?: string
-  plugins?: Plugin[]
-  extensions?: Extension[]
-  defaults?: object
-  defaultPlugin?: Plugin
-  config?: object
-  run?: (rawCommand: string | object, extraOptions?: object) => any
+  public brand?: string
+  public plugins?: Plugin[]
+  public extensions?: Extension[]
+  public defaults?: object
+  public defaultPlugin?: Plugin
+  public config?: object
+  public run?: (rawCommand: string | object, extraOptions?: object) => any
 
   /**
    * Create and initialize an empty Runtime.
    */
-  constructor(brand?: string) {
+  constructor (brand?: string) {
     this.brand = brand
     this.run = run // awkward because node.js doesn't support async-based class functions yet.
     this.plugins = []
@@ -44,7 +44,7 @@ class Runtime {
    * For backwards compatability. No-op.
    * @returns {Runtime} This runtime.
    */
-  create(): Runtime {
+  public create (): Runtime {
     return this
   }
 
@@ -53,7 +53,7 @@ class Runtime {
    * available in gluegun, but follow the exact same method
    * for extending the core as 3rd party extensions do.
    */
-  addCoreExtensions(): void {
+  public addCoreExtensions (): void {
     this.addExtension('meta', require('../core-extensions/meta-extension'))
     this.addExtension('strings', require('../core-extensions/template-extension'))
     this.addExtension('print', require('../core-extensions/print-extension'))
@@ -71,7 +71,7 @@ class Runtime {
    *
    * @param {Object} command
    */
-  addCommand(command: any): Runtime {
+  public addCommand (command: any): Runtime {
     if (!this.defaultPlugin) {
       throw new Error(
         `Can't add command ${command.name} - no default plugin. You may have forgotten a src() on your runtime.`,
@@ -98,7 +98,7 @@ class Runtime {
    * @param {string} name   The context property name.
    * @param {object} setup  The setup function.
    */
-  addExtension(name: string, setup: (context: RunContext) => any): Runtime {
+  public addExtension (name: string, setup: (context: RunContext) => any): Runtime {
     this.extensions.push({ name, setup })
     return this
   }
@@ -110,7 +110,7 @@ class Runtime {
    * @param  {Object} options   Additional loading options.
    * @return {Runtime}          This runtime.
    */
-  addDefaultPlugin(directory: string, options: object = {}): Runtime {
+  public addDefaultPlugin (directory: string, options: object = {}): Runtime {
     this.defaultPlugin = this.addPlugin(directory, { required: true, name: this.brand, ...options })
 
     // load config and set defaults
@@ -128,7 +128,7 @@ class Runtime {
    * @param  {Object} options   Additional loading options.
    * @return {Plugin | null}           The plugin that was created.
    */
-  addPlugin(directory: string, options: Options = {}): Plugin | null {
+  public addPlugin (directory: string, options: Options = {}): Plugin | null {
     if (!isDirectory(directory)) {
       if (options.required) {
         throw new Error(`Error: couldn't load plugin (not a directory): ${directory}`)
@@ -139,11 +139,11 @@ class Runtime {
 
     const plugin = loadPluginFromDirectory(resolve(directory), {
       brand: this.brand,
-      hidden: options['hidden'],
-      name: options['name'],
-      commandFilePattern: options['commandFilePattern'],
-      extensionFilePattern: options['extensionFilePattern'],
-      preloadedCommands: options['preloadedCommands'],
+      hidden: options.hidden,
+      name: options.name,
+      commandFilePattern: options.commandFilePattern,
+      extensionFilePattern: options.extensionFilePattern,
+      preloadedCommands: options.preloadedCommands,
     })
 
     this.plugins.push(plugin)
@@ -158,11 +158,13 @@ class Runtime {
    * @param {Object} options   Addition loading options.
    * @return {Runtime}         This runtime
    */
-  addPlugins(directory: string, options: object = {}): Plugin[] {
-    if (isBlank(directory) || !isDirectory(directory)) return []
+  public addPlugins (directory: string, options: object = {}): Plugin[] {
+    if (isBlank(directory) || !isDirectory(directory)) {
+      return []
+    }
 
     // find matching subdirectories
-    const subdirs = subdirectories(directory, false, options['matching'], true)
+    const subdirs = subdirectories(directory, false, options.matching, true)
 
     // load each one using `this.plugin`
     return subdirs.map(dir => this.addPlugin(dir, dissoc('matching', options)))

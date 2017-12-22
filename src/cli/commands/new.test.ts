@@ -1,13 +1,13 @@
 import test from 'ava'
 import * as sinon from 'sinon'
-import * as strings from '../../toolbox/string-tools'
 import RunContext from '../../domain/run-context'
+import * as strings from '../../toolbox/string-tools'
 
 const command = require('./new')
 
 sinon.stub(console, 'log')
 
-function createContext(): RunContext {
+function createContext (): RunContext {
   const fakeContext = new RunContext()
   fakeContext.strings = strings
   fakeContext.filesystem = {

@@ -1,13 +1,13 @@
 import * as jetpack from 'fs-jetpack'
-import { pipe, map, sortBy, prop, propEq, reject, replace, unnest, equals } from 'ramda'
-import RunContext from '../domain/run-context'
+import { equals, map, pipe, prop, propEq, reject, replace, sortBy, unnest } from 'ramda'
 import Plugin from '../domain/plugin'
+import RunContext from '../domain/run-context'
 /**
  * Finds the version for the currently running CLI.
  *
  * @param {RunContext} context
  */
-export function getVersion(context: RunContext): string {
+export function getVersion (context: RunContext): string {
   let directory = context.runtime.defaultPlugin && context.runtime.defaultPlugin.directory
   if (!directory) {
     throw new Error('context.version: Unknown CLI version (no src folder found)')
@@ -25,7 +25,9 @@ export function getVersion(context: RunContext): string {
     // if we reach the git repo or root, we can't determine the version -- this is where we bail
     const git = jetpack.path(directory, '.git')
     const root = jetpack.path('/')
-    if (directory === root || jetpack.exists(git) === 'dir') break
+    if (directory === root || jetpack.exists(git) === 'dir') {
+      break
+    }
 
     // go up another directory
     directory = jetpack.path(directory, '..')
@@ -46,7 +48,7 @@ const isHidden = propEq('hidden', true)
  * @param {string[]} commandRoot   Optional, only show commands with this root
  * @return {[string, string]}
  */
-export function commandInfo(context: RunContext, plugins?: Plugin[], commandRoot?: string[]): any {
+export function commandInfo (context: RunContext, plugins?: Plugin[], commandRoot?: string[]): any {
   return pipe(reject(isHidden), sortBy(prop('name')), map(p => getListOfCommands(context, p, commandRoot)), unnest)(
     plugins || context.runtime.plugins,
   )
@@ -60,7 +62,7 @@ export function commandInfo(context: RunContext, plugins?: Plugin[], commandRoot
  * @param {string[]} commandRoot   Optional, only show commands with this root
  * @return {[string, string]}
  */
-export function getListOfCommands(context: RunContext, plugin?: Plugin, commandRoot?: string[]) {
+export function getListOfCommands (context: RunContext, plugin?: Plugin, commandRoot?: string[]) {
   return pipe(
     reject(isHidden),
     reject(command => {

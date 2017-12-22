@@ -1,6 +1,6 @@
-import { parseParams, createParams } from '../toolbox/parameter-tools'
-import { isNil, clone, merge } from 'ramda'
+import { clone, isNil, merge } from 'ramda'
 import RunContext from '../domain/run-context'
+import { createParams, parseParams } from '../toolbox/parameter-tools'
 import Runtime from './runtime'
 import { findCommand } from './runtime-find-command'
 
@@ -11,7 +11,7 @@ import { findCommand } from './runtime-find-command'
  * @param  {{}} extraOptions Additional options use to execute a command.
  * @return {RunContext} The RunContext object indicating what happened.
  */
-export async function run(this: Runtime, rawCommand: string | object, extraOptions = {}): Promise<RunContext> {
+export async function run (this: Runtime, rawCommand: string | object, extraOptions = {}): Promise<RunContext> {
   // use provided rawCommand or process arguments if none given
   rawCommand = rawCommand || process.argv
 
@@ -28,13 +28,15 @@ export async function run(this: Runtime, rawCommand: string | object, extraOptio
   const { plugin, command, array } = findCommand(this, context.parameters)
 
   // jet if we have no plugin or command
-  if (isNil(plugin) || isNil(command)) return context
+  if (isNil(plugin) || isNil(command)) {
+    return context
+  }
 
   // rebuild the parameters, now that we know the plugin and command
   context.parameters = createParams({
     plugin: plugin.name,
     command: command.name,
-    array: array,
+    array,
     options: context.parameters.options,
     raw: rawCommand,
     argv: process.argv,

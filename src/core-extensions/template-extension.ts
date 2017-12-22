@@ -1,16 +1,16 @@
 import * as ejs from 'ejs'
 import * as jetpack from 'fs-jetpack'
-import { replace, forEach, keys } from 'ramda'
-import * as stringTools from '../toolbox/string-tools'
-import { isFile } from '../toolbox/filesystem-tools'
+import { forEach, keys, replace } from 'ramda'
 import Options from '../domain/options'
+import { isFile } from '../toolbox/filesystem-tools'
+import * as stringTools from '../toolbox/string-tools'
 
 /**
  * Builds the code generation feature.
  *
  * @param  {RunContext} context The running context.
  */
-function attach(context) {
+function attach (context) {
   const { plugin } = context
 
   /**
@@ -19,7 +19,7 @@ function attach(context) {
    * @param  {{}} opts Generation options.
    * @return {string}  The generated string.
    */
-  async function generate(opts: Options = {}) {
+  async function generate (opts: Options = {}) {
     // required
     const template = opts.template
 
@@ -31,7 +31,7 @@ function attach(context) {
     const data = {
       config: context && context.config,
       parameters: context && context.parameters,
-      props: props,
+      props,
     }
 
     // add our string tools to the filters available.

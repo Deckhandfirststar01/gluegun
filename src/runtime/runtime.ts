@@ -158,7 +158,7 @@ class Runtime {
    * @param {Object} options   Addition loading options.
    * @return {Runtime}         This runtime
    */
-  public addPlugins (directory: string, options: object = {}): Plugin[] {
+  public addPlugins (directory: string, options: Options = {}): Plugin[] {
     if (isBlank(directory) || !isDirectory(directory)) {
       return []
     }

@@ -1,4 +1,5 @@
 import commonjs from 'rollup-plugin-commonjs'
+import { compile } from 'google-closure-compiler-js'
 import json from 'rollup-plugin-json'
 import filesize from 'rollup-plugin-filesize'
 import progress from 'rollup-plugin-progress'
@@ -38,6 +39,13 @@ export default {
       ignore: true,
     }),
 
+    // optimizes and checks the JS output
+    closure({
+      createSourceMap: true,
+      env: 'CUSTOM',
+      processCommonJsModules: true
+    }),
+
     // needed to get by some weird error.
     // via https://github.com/rollup/rollup-plugin-commonjs/issues/28#issuecomment-167934572
     json(),
@@ -45,6 +53,24 @@ export default {
     // shows file size at end, so we can keep an eye on it
     filesize(),
   ],
+}
+
+// from https://github.com/camelaissani/rollup-plugin-closure-compiler-js/blob/master/src/index.js
+function closure(flags) {
+  return {
+    name: 'closure-compiler-js',
+    transformBundle(code) {
+        flags.jsCode = [{
+            src: code
+        }]
+        const output = compile(flags)
+        if (output.errors.length > 0) {
+          output.errors.forEach(e => console.dir(e, { colors: true }))
+          throw new Error(`compilation errors: ${output.errors.length}`);
+        }
+        return { code: output.compiledCode, map: output.sourceMap }
+    }
+  }
 }
 
 function stripProblematicCode() {

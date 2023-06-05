@@ -54,7 +54,7 @@
     "apisauce": "0.14.3",
     "app-module-path": "^2.2.0",
     "cli-table3": "^0.5.0",
-    "colors": "1.2.4",
+    "colors": "1.4.0",
     "cosmiconfig": "^5.0.1",
     "cross-spawn": "^6.0.5",
     "ejs": "^2.6.1",
